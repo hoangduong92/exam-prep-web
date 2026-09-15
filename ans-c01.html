@@ -17879,6 +17879,7 @@ const NAV = [
   { h: "#/sets",    t: "Bộ đề",           i: "M3 3h10v10H3zM3 6.4h10M6.4 6.4V13" },
   { h: "#/drill",   t: "Luyện theo domain", i: "M8 2v12M2 8h12" },
   { h: "#/review",  t: "Ôn lại câu sai",  i: "M13.5 8a5.5 5.5 0 1 1-1.9-4.2M13.5 2v3.4h-3.4" },
+  { h: "#/notes",   t: "Ghi chú của tôi", i: "M10.5 2.5 13.5 5.5 6 13H3v-3zM9 4l3 3" },
   { h: "#/primer",  t: "Khái niệm nền",   i: "M3 3.5h4.4A1.6 1.6 0 0 1 9 5.1V13a1.4 1.4 0 0 0-1.4-1.2H3zM13 3.5H8.6A1.6 1.6 0 0 0 7 5.1V13a1.4 1.4 0 0 1 1.4-1.2H13z" },
   { h: "#/sheets",  t: "Bảng tra nhanh",  i: "M2.5 3h11v10h-11zM2.5 6.3h11M6 6.3V13M9.7 6.3V13" },
   { h: "#/plan",    t: "Lịch ôn",         i: "M2.5 4h11v9.5h-11zM2.5 7h11M5.5 2v3M10.5 2v3" },
@@ -18588,6 +18589,100 @@ ROUTES["review"] = function (w) {
   const b = $("#startRev", w);
   if (b) b.onclick = () => startRun(null, "practice",
     { qids: due.map(q => q.id), title: `Ôn lại — ${due.length} câu` });
+};
+
+/* ═══════════════════════════════════════════════ ROUTE: ghi chú của tôi */
+function noteEntriesA() {
+  const n = S.notes || {};
+  return Object.keys(n).filter(id => (n[id] || "").trim())
+    .map(id => ({ id, q: BANK.find(x => x.id === id), text: n[id] }))
+    .sort((a, b) => (a.q && b.q)
+      ? ((a.q.set - b.q.set) || (a.q.domain - b.q.domain) || String(a.q.task).localeCompare(String(b.q.task)) || a.id.localeCompare(b.id))
+      : (a.q ? -1 : b.q ? 1 : 0));
+}
+function buildNotesTextA() {
+  const es = noteEntriesA();
+  const stamp = new Date().toISOString().slice(0, 16).replace("T", " ");
+  let out = `GHI CHÚ LUYỆN ĐỀ — ANS-C01 (AWS Advanced Networking)\n`;
+  out += `Xuất lúc: ${stamp} · ${es.length} câu có ghi chú\n`;
+  out += "=".repeat(52) + "\n\n";
+  for (const e of es) {
+    const q = e.q;
+    if (q) {
+      out += `● Bộ ${q.set} · D${q.domain} · Task ${q.task}   [${e.id}]\n`;
+      out += `Đề: ${q.q.replace(/\n+/g, " ").trim()}\n`;
+    } else {
+      out += `● [${e.id}]  (câu này không còn trong ngân hàng hiện tại)\n`;
+    }
+    out += `📝 Ghi chú: ${e.text}\n\n`;
+    out += "-".repeat(44) + "\n\n";
+  }
+  out += `<!-- ans-c01-notes-json: ${JSON.stringify(S.notes || {})} -->\n`;
+  return out;
+}
+function openExportNotes() {
+  const es = noteEntriesA();
+  if (!es.length) return;
+  const text = buildNotesTextA();
+  const filename = `ghi-chu-ans-c01-${todayISO()}.txt`;
+  modal(`
+    <h3 style="margin-bottom:6px">📤 Xuất ${es.length} ghi chú</h3>
+    <p class="small muted" style="margin-bottom:14px">Trên <b>iPhone</b>: bấm <b>Chia sẻ</b> → lưu vào Ghi chú/Files hoặc AirDrop sang máy khác. Trên <b>máy tính</b>: bấm <b>Tải file</b>.</p>
+    <div style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:12px">
+      <button class="btn primary" id="mShare">📱 Chia sẻ</button>
+      <button class="btn" id="mCopy">📋 Sao chép</button>
+      <button class="btn" id="mDl">💾 Tải file</button>
+      <button class="btn ghost" id="mClose" style="margin-left:auto">Đóng</button>
+    </div>
+    <textarea readonly id="mTa" style="width:100%;min-height:220px;font-family:ui-monospace,Menlo,Consolas,monospace;font-size:12px;line-height:1.5;background:var(--surface-2);color:var(--ink);border:1px solid var(--line);border-radius:var(--r-lg);padding:12px;resize:vertical"></textarea>
+  `, host => {
+    const ta = $("#mTa", host); ta.value = text;
+    $("#mClose", host).onclick = closeModal;
+    const shareBtn = $("#mShare", host);
+    if (navigator.share) {
+      shareBtn.onclick = async () => {
+        try {
+          const file = new File([text], filename, { type: "text/plain" });
+          if (navigator.canShare && navigator.canShare({ files: [file] })) await navigator.share({ files: [file], title: filename });
+          else await navigator.share({ title: filename, text });
+        } catch (e) { /* user huỷ */ }
+      };
+    } else shareBtn.style.display = "none";
+    $("#mCopy", host).onclick = async () => {
+      try { await navigator.clipboard.writeText(text); toast("Đã sao chép ghi chú"); }
+      catch (e) { ta.focus(); ta.select(); try { document.execCommand("copy"); toast("Đã sao chép"); } catch (_) {} }
+    };
+    $("#mDl", host).onclick = () => {
+      const blob = new Blob([text], { type: "text/plain;charset=utf-8" });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement("a"); a.href = url; a.download = filename;
+      document.body.appendChild(a); a.click(); a.remove();
+      setTimeout(() => URL.revokeObjectURL(url), 1500);
+    };
+  });
+}
+ROUTES["notes"] = function (w) {
+  const es = noteEntriesA();
+  w.innerHTML = `
+  <div class="page-head">
+    <div><h1>Ghi chú của tôi</h1>
+      <div class="sub">Ghi chú bạn viết dưới mỗi câu, gom về đây. Lưu trên máy này; xuất ra để giữ lại hoặc chuyển sang máy khác.</div></div>
+    ${es.length ? `<button class="btn primary" id="expNotes">📤 Xuất ghi chú</button>` : ""}
+  </div>
+  ${es.length ? es.map(e => `
+    <div class="card" style="margin-bottom:12px">
+      <div class="qmeta" style="margin-bottom:8px">
+        ${e.q ? domainChip(e.q.domain) + `<span class="label">Task ${esc(e.q.task)}</span><span class="label">Bộ ${e.q.set}</span>` : ""}
+        <span class="spacer"></span><span class="label dim">${esc(e.id)}</span>
+      </div>
+      <div style="font-size:13.5px;line-height:1.6;color:var(--ink-2);margin-bottom:10px">${e.q ? esc(e.q.q.replace(/\n+/g, " ").trim().slice(0, 240)) + (e.q.q.length > 240 ? "…" : "") : "(câu không còn trong ngân hàng hiện tại)"}</div>
+      <div style="white-space:pre-wrap;background:var(--acc-wash);border:1px solid var(--acc-line);border-radius:var(--r-lg);padding:11px 13px;font-size:13.5px;line-height:1.6">${esc(e.text)}</div>
+    </div>`).join("")
+    : `<div class="empty"><div class="big">Chưa có ghi chú nào</div>
+        <p class="small">Trong lúc làm bài, gõ vào ô “📝 Ghi chú của tôi” dưới mỗi câu — chúng sẽ hiện ở đây.</p>
+        <a class="btn primary" href="#/sets" style="margin-top:12px">Làm bộ đề</a></div>`}`;
+  const b = $("#expNotes", w);
+  if (b) b.onclick = openExportNotes;
 };
 
 /* ═══════════════════════════════════════════════ ROUTE: primer / sheets */

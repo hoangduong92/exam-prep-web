@@ -169,6 +169,19 @@ h1{font-size:1.35rem;font-weight:750;letter-spacing:-.01em}
 .rev-note{background:linear-gradient(135deg,rgba(217,119,87,.10),rgba(196,92,58,.05));border:1px solid var(--accent);
   border-radius:var(--radius-sm);padding:11px 14px;font-size:.92rem;line-height:1.6;white-space:pre-wrap}
 
+/* xuất ghi chú */
+.act-btn{display:inline-flex;align-items:center;gap:7px;padding:10px 15px;border-radius:var(--radius-sm);
+  border:1px solid var(--accent);color:var(--accent);background:var(--accentGlow);font-weight:650;font-size:.9rem;transition:.13s}
+.act-btn:hover{filter:brightness(1.1)}
+.modal-bg{position:fixed;inset:0;background:rgba(0,0,0,.6);display:flex;align-items:center;justify-content:center;padding:18px;z-index:100}
+.modal{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:20px;max-width:640px;width:100%;max-height:86vh;display:flex;flex-direction:column}
+.modal-h{font-size:1.05rem;font-weight:700;margin-bottom:6px}
+.modal-sub{color:var(--muted);font-size:.86rem;line-height:1.55;margin-bottom:14px}
+.modal-sub b{color:var(--ink)}
+.modal-acts{display:flex;flex-wrap:wrap;gap:9px;align-items:center;margin-bottom:12px}
+.modal-ta{flex:1;min-height:200px;width:100%;background:var(--surface2);border:1px solid var(--line);border-radius:var(--radius-sm);
+  color:var(--ink);font-family:"SF Mono",ui-monospace,Menlo,Consolas,monospace;font-size:.78rem;line-height:1.5;padding:12px;resize:vertical}
+
 /* nav */
 .nav{display:flex;gap:10px;margin-top:20px}
 .nav button{flex:1;padding:13px;border-radius:var(--radius-sm);font-weight:650;font-size:.96rem;border:1px solid var(--line);background:var(--surface2);color:var(--ink);transition:.14s}
@@ -298,6 +311,8 @@ h1{font-size:1.35rem;font-weight:750;letter-spacing:-.01em}
       <div class="brk-h">Ngoài phạm vi thi — khỏi học</div>
       <div class="oos" id="oos"></div>
     </div>
+
+    <div class="card" id="notes-card"></div>
 
     <div class="card" id="hist-card"></div>
 
@@ -5628,6 +5643,7 @@ function renderBlueprint(){
 }
 
 function renderHist(){
+  renderNotesCard();
   const c = $("hist-card");
   if(!hist.length){ c.classList.add("hidden"); return; }
   c.classList.remove("hidden");
@@ -5637,6 +5653,94 @@ function renderHist(){
       return `<div class="hist-row"><span class="hp" style="color:${col}">${h.pct}%</span>` +
         `<span class="hd">${esc(h.label)}</span><span class="hn">${h.c}/${h.n} · ${esc(h.t)}</span></div>`;
     }).join("") + `</div>`;
+}
+
+/* ═══════════ ghi chú: gom & xuất ═══════════ */
+function noteEntries(){
+  return Object.keys(notes).filter(id => (notes[id] || "").trim())
+    .map(id => ({ id, q: byId.get(id), text: notes[id] }))
+    .sort((a, b) => (a.q && b.q) ? ((a.q.set - b.q.set) || (a.q.n - b.q.n)) : (a.q ? -1 : b.q ? 1 : 0));
+}
+function renderNotesCard(){
+  const c = $("notes-card");
+  const es = noteEntries();
+  if(!es.length){ c.classList.add("hidden"); return; }
+  c.classList.remove("hidden");
+  c.innerHTML = `<h2>📝 <span class="em">Ghi chú</span> của tôi</h2>` +
+    `<div class="count-note">Bạn đã ghi chú ở <b>${es.length}</b> câu. Xuất ra để lưu lại hoặc chuyển sang máy khác.</div>` +
+    `<div style="margin-top:14px"><button class="act-btn" id="notes-export">📤 Xuất ghi chú</button></div>`;
+  $("notes-export").onclick = exportNotes;
+}
+function buildNotesText(){
+  const es = noteEntries();
+  const stamp = new Date().toISOString().slice(0,16).replace("T"," ");
+  let out = `GHI CHÚ LUYỆN ĐỀ — ${EXAM.name}\n`;
+  out += `Xuất lúc: ${stamp} · ${es.length} câu có ghi chú\n`;
+  out += "=".repeat(52) + "\n\n";
+  for(const e of es){
+    const q = e.q;
+    if(q){
+      out += `● Câu ${q.n} · Bộ ${q.set} · D${q.domain} · S${q.scenario}   [${e.id}]\n`;
+      out += `Đề: ${q.q}\n`;
+      if(q.q_vi) out += `Dịch: ${q.q_vi}\n`;
+    } else {
+      out += `● [${e.id}]  (câu này không còn trong ngân hàng hiện tại)\n`;
+    }
+    out += `📝 Ghi chú: ${e.text}\n\n`;
+    out += "-".repeat(44) + "\n\n";
+  }
+  out += `<!-- cca-notes-json: ${JSON.stringify(notes)} -->\n`;
+  return out;
+}
+function exportNotes(){
+  const es = noteEntries();
+  if(!es.length) return;
+  const text = buildNotesText();
+  const filename = `ghi-chu-cca-f-${new Date().toISOString().slice(0,10)}.txt`;
+
+  const bg = document.createElement("div");
+  bg.className = "modal-bg";
+  bg.innerHTML = `<div class="modal">
+    <div class="modal-h">📤 Xuất ${es.length} ghi chú</div>
+    <div class="modal-sub">Trên <b>iPhone</b>: bấm <b>Chia sẻ</b> → lưu vào Ghi chú/Files hoặc AirDrop sang máy khác. Trên <b>máy tính</b>: bấm <b>Tải file</b>. Hoặc <b>Sao chép</b> rồi dán đi đâu tuỳ ý.</div>
+    <div class="modal-acts">
+      <button class="act-btn" id="m-share">📱 Chia sẻ</button>
+      <button class="act-btn" id="m-copy">📋 Sao chép</button>
+      <button class="act-btn" id="m-dl">💾 Tải file</button>
+      <button id="m-close" style="margin-left:auto;color:var(--faint);text-decoration:underline">Đóng</button>
+    </div>
+    <textarea class="modal-ta" readonly></textarea>
+  </div>`;
+  document.body.appendChild(bg);
+  const ta = bg.querySelector(".modal-ta"); ta.value = text;
+  const close = () => bg.remove();
+  bg.addEventListener("mousedown", e => { if(e.target === bg) close(); });
+  $("m-close").onclick = close;
+
+  const shareBtn = $("m-share");
+  if(navigator.share){
+    shareBtn.onclick = async () => {
+      try {
+        const file = new File([text], filename, { type: "text/plain" });
+        if(navigator.canShare && navigator.canShare({ files: [file] })) await navigator.share({ files: [file], title: filename });
+        else await navigator.share({ title: filename, text });
+      } catch(e){ /* user huỷ */ }
+    };
+  } else shareBtn.style.display = "none";
+
+  $("m-copy").onclick = async () => {
+    const btn = $("m-copy"), old = btn.textContent;
+    try { await navigator.clipboard.writeText(text); }
+    catch(e){ ta.focus(); ta.select(); try { document.execCommand("copy"); } catch(_){} }
+    btn.textContent = "✓ Đã sao chép"; setTimeout(() => btn.textContent = old, 1600);
+  };
+  $("m-dl").onclick = () => {
+    const blob = new Blob([text], { type: "text/plain;charset=utf-8" });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a"); a.href = url; a.download = filename;
+    document.body.appendChild(a); a.click(); a.remove();
+    setTimeout(() => URL.revokeObjectURL(url), 1500);
+  };
 }
 
 function renderResume(live){
