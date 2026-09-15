@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Luyện đề — Ôn thi chứng chỉ</title>
+
+<meta name="theme-color" content="#1a1614">
+<link rel="manifest" href="manifest.webmanifest">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Luyện đề">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="icon" href="icon-192.png">
+<script>if('serviceWorker' in navigator){addEventListener('load',()=>navigator.serviceWorker.register('sw.js').catch(()=>{}));}</script>
+
+<style>
+:root{--bg:#1a1614;--surface:#241f1c;--surface2:#2e2825;--line:#3a322e;--ink:#f2ece6;--muted:#a89c92;--faint:#7a6f66;--accent:#d97757}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{background:var(--bg);color:var(--ink);-webkit-font-smoothing:antialiased}
+body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Be Vietnam Pro",Roboto,Arial,sans-serif;line-height:1.55;
+  padding:max(24px,env(safe-area-inset-top)) max(18px,env(safe-area-inset-right)) 48px max(18px,env(safe-area-inset-left))}
+.wrap{max-width:640px;margin:0 auto}
+.top{display:flex;align-items:center;gap:12px;margin-bottom:4px}
+.logo{width:38px;height:38px;border-radius:10px;background:linear-gradient(135deg,#e08a63,#c45c3a);flex:none;
+  display:grid;place-items:center;font-weight:800;color:#fff;font-size:20px}
+h1{font-size:1.35rem;font-weight:750;letter-spacing:-.01em}
+.sub{color:var(--muted);font-size:.92rem;margin:6px 0 20px}
+.cards{display:grid;gap:12px}
+.card{display:block;text-decoration:none;color:inherit;background:var(--surface);border:1px solid var(--line);
+  border-left:4px solid var(--a);border-radius:14px;padding:16px 18px;transition:.15s;-webkit-tap-highlight-color:transparent}
+.card:active{transform:scale(.99)}
+.card:hover{border-color:var(--faint);border-left-color:var(--a)}
+.badge{display:inline-block;font-size:.72rem;font-weight:700;letter-spacing:.05em;color:var(--a);
+  background:color-mix(in srgb,var(--a) 15%,transparent);border-radius:999px;padding:3px 10px;margin-bottom:8px}
+.cname{font-size:1.08rem;font-weight:700;letter-spacing:-.01em}
+.ctier{color:var(--muted);font-size:.88rem}
+.cmeta{color:var(--faint);font-size:.8rem;margin-top:8px}
+.cgo{color:var(--a);font-weight:650;font-size:.9rem;margin-top:10px}
+.tip{margin-top:26px;background:var(--surface2);border:1px solid var(--line);border-radius:12px;padding:14px 16px;
+  color:var(--muted);font-size:.86rem}
+.tip b{color:var(--ink);font-weight:650}
+.tip ol{margin:8px 0 0 18px;padding:0}
+.tip li{margin:3px 0}
+.foot{color:var(--faint);font-size:.78rem;text-align:center;margin-top:26px}
+#ios{display:none}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="top">
+    <div class="logo">✦</div>
+    <h1>Luyện đề chứng chỉ</h1>
+  </div>
+  <div class="sub">Ôn tập offline trên điện thoại — chọn kỳ thi để bắt đầu.</div>
+  <div class="cards">
+    <a class="card" href="cca.html" style="--a:#d97757">
+      <div class="badge">CCA-F</div>
+      <div class="cname">Claude Certified Architect</div>
+      <div class="ctier">Foundations</div>
+      <div class="cmeta">150 câu · 592 KB · offline</div>
+      <div class="cgo">Luyện đề →</div>
+    </a>
+    <a class="card" href="ans-c01.html" style="--a:#4a90d9">
+      <div class="badge">ANS-C01</div>
+      <div class="cname">AWS Advanced Networking</div>
+      <div class="ctier">Specialty</div>
+      <div class="cmeta">326 câu · 1196 KB · offline</div>
+      <div class="cgo">Luyện đề →</div>
+    </a>
+  </div>
+  <div class="tip" id="ios">
+    <b>📲 Cài vào màn hình chính (để dùng khi mất sóng trên tàu):</b>
+    <ol>
+      <li>Mở trang này bằng <b>Safari</b> khi còn wifi, đợi vài giây cho tải xong.</li>
+      <li>Bấm nút <b>Chia sẻ</b> (ô vuông có mũi tên) ở dưới.</li>
+      <li>Chọn <b>Thêm vào MH chính</b> → <b>Thêm</b>.</li>
+      <li>Mở app từ icon vừa tạo — chạy được cả khi không có mạng.</li>
+    </ol>
+  </div>
+  <div class="foot">Đã lưu offline · tiến độ luyện được ghi trên máy bạn</div>
+</div>
+<script>
+// Gợi ý cài chỉ hiện trên iPhone/iPad khi chưa mở ở chế độ đã cài.
+(function(){
+  var iOS=/iP(hone|ad|od)/.test(navigator.userAgent);
+  var standalone=window.navigator.standalone===true||matchMedia('(display-mode: standalone)').matches;
+  if(iOS && !standalone){var e=document.getElementById('ios');if(e)e.style.display='block';}
+})();
+</script>
+</body>
+</html>
