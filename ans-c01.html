@@ -365,6 +365,17 @@ pre code {
 .exp .refs { margin-top: 12px; padding-top: 10px; border-top: 1px solid var(--line); display: flex; flex-direction: column; gap: 5px; }
 .exp .refs a { font-size: 12.5px; }
 
+/* ghi chú của người dùng */
+.notebox { margin-top: 16px; border-top: 1px dashed var(--line); padding-top: 14px; }
+.note-h { display: flex; align-items: center; justify-content: space-between; gap: 8px;
+  font-size: 12px; color: var(--ink-3); text-transform: uppercase; letter-spacing: .05em; font-weight: 600; margin-bottom: 8px; }
+.note-saved { text-transform: none; letter-spacing: 0; font-weight: 500; color: var(--ok); font-size: 12px; opacity: 0; transition: opacity .2s; }
+.note-saved.show { opacity: 1; }
+.noteinput { width: 100%; background: var(--surface-2); border: 1px solid var(--line); border-radius: var(--r-lg);
+  color: var(--ink); font-family: inherit; font-size: 14px; line-height: 1.6; padding: 11px 13px; resize: vertical; min-height: 62px; }
+.noteinput:focus { outline: none; border-color: var(--acc); }
+.noteinput::placeholder { color: var(--ink-3); }
+
 /* exam navigator grid */
 .navgrid { display: grid; grid-template-columns: repeat(auto-fill, minmax(34px,1fr)); gap: 5px; }
 .navgrid button {
@@ -17673,7 +17684,7 @@ const BOXES = [0, 0, 1, 2, 4, 7];
 
 /* ─────────────────────────────────────────────── state */
 const DEFAULT_STATE = {
-  v: 1, examDate: null, attempts: [], srs: {}, theme: "auto", live: null,
+  v: 1, examDate: null, attempts: [], srs: {}, theme: "auto", live: null, notes: {},
 };
 let S = load();
 
@@ -17843,6 +17854,24 @@ function router() {
   paintRail();
 }
 window.addEventListener("hashchange", router);
+
+/* ghi chú theo câu — một listener chung, tự lưu (dùng cho mọi thẻ câu hỏi) */
+let noteTimer = null;
+document.addEventListener("input", e => {
+  const ta = e.target.closest && e.target.closest(".noteinput");
+  if (!ta) return;
+  const id = ta.dataset.noteId;
+  if (!id) return;
+  S.notes = S.notes || {};
+  const v = ta.value;
+  if (v.trim()) S.notes[id] = v; else delete S.notes[id];
+  clearTimeout(noteTimer);
+  noteTimer = setTimeout(() => {
+    save();
+    const badge = document.querySelector('.note-saved[data-note-saved="' + (window.CSS && CSS.escape ? CSS.escape(id) : id) + '"]');
+    if (badge) { badge.classList.add("show"); setTimeout(() => badge.classList.remove("show"), 1400); }
+  }, 400);
+});
 
 /* ─────────────────────────────────────────────── rail */
 const NAV = [
@@ -18040,7 +18069,11 @@ function qCard(q, opts) {
     ${q.refs && q.refs.length ? `<div class="refs">
       ${q.refs.map(r => `<a href="${esc(r.u)}" target="_blank" rel="noopener">↗ ${esc(r.t)}</a>`).join("")}
     </div>` : ""}
-  </div>` : ""}`;
+  </div>` : ""}
+  <div class="notebox">
+    <div class="note-h"><span>📝 Ghi chú của tôi</span><span class="note-saved" data-note-saved="${esc(q.id)}">đã lưu ✓</span></div>
+    <textarea class="noteinput" data-note-id="${esc(q.id)}" rows="3" placeholder="Ghi lại quan điểm, cách suy luận, mẹo nhớ… (tự lưu trên máy, dùng được offline)">${esc((S.notes && S.notes[q.id]) || "")}</textarea>
+  </div>`;
 }
 
 /** Wire option buttons. onChange(pickedArray) */

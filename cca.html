@@ -157,6 +157,18 @@ h1{font-size:1.35rem;font-weight:750;letter-spacing:-.01em}
 .taskref{font-size:.83rem;color:var(--faint);line-height:1.55}
 .taskref b{color:var(--muted);font-weight:650}
 
+/* ghi chú của người dùng */
+.notebox{margin-top:16px;border-top:1px dashed var(--line);padding-top:14px}
+.note-h{display:flex;align-items:center;justify-content:space-between;gap:8px;font-size:.82rem;color:var(--faint);text-transform:uppercase;letter-spacing:.06em;font-weight:650;margin-bottom:8px}
+.note-saved{text-transform:none;letter-spacing:0;font-weight:550;color:var(--ok);font-size:.8rem;opacity:0;transition:opacity .2s}
+.note-saved.show{opacity:1}
+.noteinput{width:100%;background:var(--surface2);border:1px solid var(--line);border-radius:var(--radius-sm);color:var(--ink);
+  font-family:inherit;font-size:.92rem;line-height:1.6;padding:11px 13px;resize:vertical;min-height:64px;transition:border-color .15s}
+.noteinput:focus{outline:none;border-color:var(--accent)}
+.noteinput::placeholder{color:var(--faint)}
+.rev-note{background:linear-gradient(135deg,rgba(217,119,87,.10),rgba(196,92,58,.05));border:1px solid var(--accent);
+  border-radius:var(--radius-sm);padding:11px 14px;font-size:.92rem;line-height:1.6;white-space:pre-wrap}
+
 /* nav */
 .nav{display:flex;gap:10px;margin-top:20px}
 .nav button{flex:1;padding:13px;border-radius:var(--radius-sm);font-weight:650;font-size:.96rem;border:1px solid var(--line);background:var(--surface2);color:var(--ink);transition:.14s}
@@ -306,6 +318,10 @@ h1{font-size:1.35rem;font-weight:750;letter-spacing:-.01em}
       <div class="pickhint hidden" id="pickhint"></div>
       <div class="choices" id="choices"></div>
       <div id="expl"></div>
+      <div class="notebox">
+        <div class="note-h"><span>📝 Ghi chú của tôi</span><span class="note-saved" id="note-saved">đã lưu ✓</span></div>
+        <textarea id="noteinput" class="noteinput" rows="3" placeholder="Ghi lại quan điểm, cách suy luận, mẹo nhớ, chỗ hay nhầm… (tự lưu trên máy, dùng được offline)"></textarea>
+      </div>
     </div>
     <div class="nav">
       <button id="prev">← Trước</button>
@@ -5487,11 +5503,12 @@ const DEF_CFG = { set:"all", mode:"practice", scope:"all", dom:"all", diff:"all"
 let cfg = { ...DEF_CFG };
 let hist = [];      // [{t, pct, c, n, label}]
 let state = null;   // {list:[{id,perm}], idx, answers:{id:[origIdx]}, flags:[], checked:[]}
+let notes = {};     // {qid: "ghi chú"} — theo id câu, sống độc lập với từng lượt luyện
 
 function save(){
   try {
     localStorage.setItem(LS, JSON.stringify({
-      cfg, hist,
+      cfg, hist, notes,
       live: state ? {
         list: state.list, idx: state.idx, answers: state.answers,
         flags: [...state.flags], checked: [...state.checked], mode: cfg.mode,
@@ -5506,6 +5523,7 @@ function load(){
     const o = JSON.parse(raw);
     if(o.cfg) cfg = { ...DEF_CFG, ...o.cfg };
     if(Array.isArray(o.hist)) hist = o.hist;
+    if(o.notes && typeof o.notes === "object") notes = o.notes;
     return o.live || null;
   } catch(e){ return null; }
 }
@@ -5730,6 +5748,9 @@ function render(){
 
   if(isChecked) renderExpl(q, v, picked); else $("expl").innerHTML = "";
 
+  const ni = $("noteinput"); if(ni) ni.value = notes[q.id] || "";
+  const ns = $("note-saved"); if(ns) ns.classList.remove("show");
+
   $("prev").disabled = state.idx === 0;
   const last = state.idx === total-1, practice = cfg.mode === "practice";
   const check = $("check"), next = $("next");
@@ -5806,6 +5827,19 @@ $("next").onclick = () => {
   else { state.idx++; render(); save(); }
 };
 $("prev").onclick = () => { if(state.idx > 0){ state.idx--; render(); save(); } };
+
+let noteTimer = null;
+$("noteinput").addEventListener("input", function(){
+  if(!state) return;
+  const id = curQ().id, val = this.value;
+  if(val.trim()) notes[id] = val; else delete notes[id];
+  clearTimeout(noteTimer);
+  noteTimer = setTimeout(() => {
+    save();
+    const ns = $("note-saved");
+    if(ns){ ns.classList.add("show"); setTimeout(() => ns.classList.remove("show"), 1400); }
+  }, 400);
+});
 $("flagbtn").onclick = () => {
   const id = curQ().id;
   if(state.flags.has(id)) state.flags.delete(id); else state.flags.add(id);
@@ -5965,6 +5999,8 @@ function reviewBody(q, v, picked){
   h += `<div class="rev-mini">🔍 Phân tích</div><div class="ana">${anaRows(q,v,picked)}</div>`;
   h += `<div class="rev-mini">💡 Mấu chốt</div><div class="take"><span class="ti">💡</span><span>${esc(q.takeaway)}</span></div>`;
   h += termsHtml(q).replace(/sec-h/g, "rev-mini");
+  if(notes[q.id] && notes[q.id].trim())
+    h += `<div class="rev-mini">📝 Ghi chú của tôi</div><div class="rev-note">${esc(notes[q.id])}</div>`;
   return h;
 }
 
