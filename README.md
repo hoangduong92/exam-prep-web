@@ -15,7 +15,11 @@
 
 ## Có gì
 
-- **CCA-F** — Claude Certified Architect (Foundations) · 150 câu
+- **CCAO-F** — Claude Certified Associate (Foundations) · 150 câu
+- **CCDV-F** — Claude Certified Developer (Foundations) · 150 câu
+- **CCAR-F** — Claude Certified Architect (Foundations) · 150 câu
+- **CCAR-P** — Claude Certified Architect (Professional) · 150 câu
+- **CCA-F** — Claude Certified Architect (Foundations · bản cũ) · 150 câu
 - **ANS-C01** — AWS Advanced Networking (Specialty) · 326 câu
 
 Tiến độ luyện được lưu ngay trên máy bạn. Trang này tự sinh từ `web/build-site.mjs` (repo nguồn private); cập nhật bằng `node web/deploy.mjs`.
