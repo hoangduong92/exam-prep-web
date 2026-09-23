@@ -15,6 +15,7 @@
 
 ## Có gì
 
+- **LABS** — Claude Cert Labs (Học theo exam guide · CCAO · CCDV · CCAR-F · CCAR-P) · 123 bài
 - **CCAO-F** — Claude Certified Associate (Foundations) · 150 câu
 - **CCDV-F** — Claude Certified Developer (Foundations) · 150 câu
 - **CCAR-F** — Claude Certified Architect (Foundations) · 150 câu
