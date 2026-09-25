@@ -97,7 +97,9 @@ a{color:inherit}
 .r-st{font-size:13.5px;color:var(--ink-3);margin-top:4px}
 .r-st b{color:var(--ink);font-weight:600}
 .r-st.live{color:var(--flag)}
-.row .btn{min-width:140px}
+.acts{display:flex;gap:8px}
+.row .btn{min-width:120px}
+.labs-row{border-bottom:1px solid var(--line);border-radius:var(--r-lg) var(--r-lg) 0 0}
 .labs{padding:20px 22px;display:grid;grid-template-columns:minmax(0,1fr) auto;gap:14px 22px;align-items:center;--c:var(--labs)}
 .labs .bar{grid-column:1 / -1;height:6px;border-radius:3px;background:var(--surface-2);box-shadow:inset 0 0 0 1px var(--line);overflow:hidden}
 .labs .bar i{display:block;height:100%;width:0;background:var(--labs);border-radius:3px;transition:width .5s var(--ease)}
@@ -115,7 +117,8 @@ a{color:inherit}
   .row{gap:12px;padding:14px 16px}
   .row h3{font-size:17px}
   .row h3 em{display:block;font-size:13px}
-  .row .btn{min-width:0;min-height:40px;padding:0 14px;font-size:13.5px}
+  .row{grid-template-columns:minmax(0,1fr)}
+  .acts .btn{flex:1;min-width:0;min-height:40px;padding:0 12px;font-size:13.5px}
   .labs{grid-template-columns:minmax(0,1fr);gap:12px;padding:16px 18px}
   .labs .btn,.resume .btn{width:100%}
   .labs .bar{grid-row:2}
@@ -131,31 +134,28 @@ a{color:inherit}
 <main class="wrap">
   <section class="hero">
     <h1>Hôm nay ôn gì?</h1>
-    <p>5 đề luyện với 926 câu, cùng 123 bài học theo exam guide. Tiến độ lưu ngay trên máy này.</p>
+    <p>5 đề với 926 câu. Bốn đề Claude học và luyện chung một chỗ trong Labs (123 bài học theo exam guide). Tiến độ lưu ngay trên máy này.</p>
   </section>
   <section class="resume" id="resume" hidden></section>
   <section>
-    <div class="sec-h"><h2>Học theo bài</h2><span>Đọc cơ chế → xem sơ đồ → làm câu thật</span></div>
-    <div class="panel labs" id="labs">
-      <div>
-        <div class="r-code"><span class="dot"></span>LABS<span> · 123 bài · 4 đề Claude</span></div>
-        <h3>Claude Cert Labs</h3>
-        <p class="r-st" id="labs-st">Chưa học bài nào</p>
-      </div>
-      <a class="btn" href="learn.html" id="labs-go">Vào học →</a>
-      <span class="bar"><i id="labs-bar"></i></span>
-    </div>
-  </section>
-  <section>
-    <div class="sec-h"><h2>Luyện đề</h2><span>Bấm vào để luyện hoặc thi thử có giờ</span></div>
+    <div class="sec-h"><h2>Đề Claude</h2><span>Học theo bài hoặc luyện đề, thi thử — tất cả trong Labs</span></div>
     <div class="panel">
+      <div class="labs labs-row" id="labs">
+        <div>
+          <div class="r-code"><span class="dot"></span>LABS<span> · 123 bài · 4 đề Claude</span></div>
+          <h3>Claude Cert Labs</h3>
+          <p class="r-st" id="labs-st">Chưa học bài nào</p>
+        </div>
+        <a class="btn" href="learn.html" id="labs-go" data-learn="home|">Vào Labs →</a>
+        <span class="bar"><i id="labs-bar"></i></span>
+      </div>
       <div class="row" data-app="ccao" style="--c:#cc6b49">
         <div class="r-name">
           <div class="r-code"><span class="dot"></span>CCAO-F<span> · 150 câu</span></div>
           <h3>Claude Certified Associate <em>Foundations</em></h3>
           <p class="r-st" data-st>Chưa luyện lần nào</p>
         </div>
-        <a class="btn" href="ccao.html" data-go>Luyện đề →</a>
+        <div class="acts"><a class="btn" href="learn.html" data-learn="labs|ccao">Học bài</a><a class="btn" href="learn.html" data-learn="practice|ccao" data-go>Luyện đề →</a></div>
       </div>
       <div class="row" data-app="ccdv" style="--c:#c98a2f">
         <div class="r-name">
@@ -163,7 +163,7 @@ a{color:inherit}
           <h3>Claude Certified Developer <em>Foundations</em></h3>
           <p class="r-st" data-st>Chưa luyện lần nào</p>
         </div>
-        <a class="btn" href="ccdv.html" data-go>Luyện đề →</a>
+        <div class="acts"><a class="btn" href="learn.html" data-learn="labs|ccdv">Học bài</a><a class="btn" href="learn.html" data-learn="practice|ccdv" data-go>Luyện đề →</a></div>
       </div>
       <div class="row" data-app="ccarf" style="--c:#974324">
         <div class="r-name">
@@ -171,7 +171,7 @@ a{color:inherit}
           <h3>Claude Certified Architect <em>Foundations</em></h3>
           <p class="r-st" data-st>Chưa luyện lần nào</p>
         </div>
-        <a class="btn" href="ccarf.html" data-go>Luyện đề →</a>
+        <div class="acts"><a class="btn" href="learn.html" data-learn="labs|ccarf">Học bài</a><a class="btn" href="learn.html" data-learn="practice|ccarf" data-go>Luyện đề →</a></div>
       </div>
       <div class="row" data-app="ccarp" style="--c:#8a5cc4">
         <div class="r-name">
@@ -179,15 +179,20 @@ a{color:inherit}
           <h3>Claude Certified Architect <em>Professional</em></h3>
           <p class="r-st" data-st>Chưa luyện lần nào</p>
         </div>
-        <a class="btn" href="ccarp.html" data-go>Luyện đề →</a>
+        <div class="acts"><a class="btn" href="learn.html" data-learn="labs|ccarp">Học bài</a><a class="btn" href="learn.html" data-learn="practice|ccarp" data-go>Luyện đề →</a></div>
       </div>
+    </div>
+  </section>
+  <section>
+    <div class="sec-h"><h2>Đề khác</h2><span>Bấm vào để luyện hoặc thi thử có giờ</span></div>
+    <div class="panel">
       <div class="row" data-app="ans-c01" style="--c:#4a90d9">
         <div class="r-name">
           <div class="r-code"><span class="dot"></span>ANS-C01<span> · 326 câu</span></div>
           <h3>AWS Advanced Networking <em>Specialty</em></h3>
           <p class="r-st" data-st>Chưa luyện lần nào</p>
         </div>
-        <a class="btn" href="ans-c01.html" data-go>Luyện đề →</a>
+        <div class="acts"><a class="btn" href="ans-c01.html" data-go>Luyện đề →</a></div>
       </div>
     </div>
   </section>
@@ -205,7 +210,7 @@ a{color:inherit}
 <script>
 (function(){
   "use strict";
-  var APPS=[{"slug":"ccao","code":"CCAO-F","file":"ccao.html","n":150},{"slug":"ccdv","code":"CCDV-F","file":"ccdv.html","n":150},{"slug":"ccarf","code":"CCAR-F","file":"ccarf.html","n":150},{"slug":"ccarp","code":"CCAR-P","file":"ccarp.html","n":150},{"slug":"ans-c01","code":"ANS-C01","file":"ans-c01.html","n":326}];
+  var APPS=[{"slug":"ccao","code":"CCAO-F","file":"learn.html","n":150,"inLabs":true},{"slug":"ccdv","code":"CCDV-F","file":"learn.html","n":150,"inLabs":true},{"slug":"ccarf","code":"CCAR-F","file":"learn.html","n":150,"inLabs":true},{"slug":"ccarp","code":"CCAR-P","file":"learn.html","n":150,"inLabs":true},{"slug":"ans-c01","code":"ANS-C01","file":"ans-c01.html","n":326,"inLabs":false}];
   var LABS=[{"c":"ccdv","code":"CCDV-F","s":"workflow-vs-agent","t":"Workflow và Agent","q":["ccdv-001","ccdv-002","ccdv-003","ccdv-004","ccdv-006","ccdv-007"]},{"c":"ccao","code":"CCAO-F","s":"prompt-structure","t":"Vai, bối cảnh, nhiệm vụ","q":["ccao-001","ccao-002","ccao-009","ccao-010","ccao-011"]},{"c":"ccarf","code":"CCAR-F","s":"agentic-loop-lifecycle","t":"Vòng đời vòng lặp agentic","q":["cca1-006","cca2-001","cca2-002"]},{"c":"ccarp","code":"CCAR-P","s":"business-problem-translation","t":"Dịch một yêu cầu nghiệp vụ thành giải pháp Claude","q":["ccarp-002","ccarp-009","ccarp-013"]},{"c":"ccao","code":"CCAO-F","s":"task-decomposition","t":"Chia một yêu cầu thành các bước","q":["ccao-003","ccao-004","ccao-012","ccao-013","ccao-014","ccao-021"]},{"c":"ccarf","code":"CCAR-F","s":"agentic-architecture","t":"Kiến trúc agent","q":["cca2-003","cca2-004","cca1-016","cca1-019","cca1-020","cca1-021","cca1-023","cca1-025"]},{"c":"ccarp","code":"CCAR-P","s":"end-to-end-feedback-loops","t":"Thiết kế vòng input → xử lý → output → feedback","q":["ccarp-003","ccarp-006","ccarp-008","ccarp-011"]},{"c":"ccdv","code":"CCDV-F","s":"agent-construction-methods","t":"Xây dựng agent Claude","q":["ccdv-008","ccdv-009","ccdv-010","ccdv-011","ccdv-015"]},{"c":"ccao","code":"CCAO-F","s":"iterating-prompts","t":"Khi bản nháp đầu vẫn chưa đúng","q":["ccao-005","ccao-006","ccao-015","ccao-016","ccao-017","ccao-018"]},{"c":"ccarf","code":"CCAR-F","s":"subagent-spawning-context","t":"Gọi subagent và truyền ngữ cảnh","q":["cca1-009","cca2-005","cca2-006"]},{"c":"ccarp","code":"CCAR-P","s":"solution-architecture","t":"Chọn kiến trúc giải pháp","q":["ccarp-001","ccarp-004","ccarp-007","ccarp-012","ccarp-005","ccarp-010"]},{"c":"ccdv","code":"CCDV-F","s":"agent-patterns-frameworks","t":"Mẫu hình và framework của agent","q":["ccdv-005","ccdv-012","ccdv-013","ccdv-014","ccdv-016","ccdv-017","ccdv-018","ccdv-019","ccdv-020","ccdv-021","ccdv-022"]},{"c":"ccao","code":"CCAO-F","s":"match-strategy-to-task-type","t":"Brainstorm, phân tích, soạn thảo, tra cứu — bốn hình dạng khác nhau","q":["ccao-007","ccao-008","ccao-019","ccao-020"]},{"c":"ccarf","code":"CCAR-F","s":"workflow-enforcement-handoff","t":"Thực thi workflow và bàn giao","q":["cca1-001","cca1-008","cca2-007","cca2-008"]},{"c":"ccarp","code":"CCAR-P","s":"multi-agent-orchestration","t":"Thiết kế hệ multi-agent và điều phối","q":["ccarp-014","ccarp-017","ccarp-020","ccarp-023"]},{"c":"ccarf","code":"CCAR-F","s":"hooks-tool-interception","t":"Hook: chặn và chuẩn hoá","q":["cca1-011","cca2-009","cca2-010","cca2-011"]},{"c":"ccarp","code":"CCAR-P","s":"decomposition-boundaries","t":"Vạch ranh giới phân rã tác vụ ở đâu","q":["ccarp-015","ccarp-018","ccarp-021","ccarp-024"]},{"c":"ccarf","code":"CCAR-F","s":"task-decomposition-strategies","t":"Chiến lược phân rã tác vụ","q":["cca1-070","cca2-012","cca2-013","cca2-014","cca1-048"]},{"c":"ccarp","code":"CCAR-P","s":"business-value-pillars","t":"Gắn một quyết định thiết kế đúng trụ cột giá trị kinh doanh","q":["ccarp-016","ccarp-019","ccarp-022","ccarp-025"]},{"c":"ccarf","code":"CCAR-F","s":"session-state-resumption","t":"Trạng thái phiên, resume và fork","q":["cca1-071","cca1-072","cca2-015","cca2-016"]},{"c":"ccao","code":"CCAO-F","s":"checking-output","t":"Kiểm chứng đầu ra của Claude","q":["ccao-022","ccao-023","ccao-024","ccao-025","ccao-032"]},{"c":"ccarf","code":"CCAR-F","s":"tool-design-mcp","t":"Thiết kế tool và MCP","q":["cca2-017","cca2-018","cca1-002","cca1-004","cca1-007","cca1-010","cca1-012"]},{"c":"ccarp","code":"CCAR-P","s":"model-selection-by-workload","t":"Chọn tier model theo khối lượng công việc","q":["ccarp-026","ccarp-027","ccarp-028"]},{"c":"ccdv","code":"CCDV-F","s":"requirements-functional-infra","t":"Yêu cầu chức năng và yêu cầu hạ tầng","q":["ccdv-057","ccdv-058","ccdv-059","ccdv-071","ccdv-072"]},{"c":"ccao","code":"CCAO-F","s":"hallucination-and-bias","t":"Nhận ra hallucination, mâu thuẫn và thiên kiến","q":["ccao-026","ccao-027","ccao-029","ccao-030","ccao-037","ccao-035"]},{"c":"ccarf","code":"CCAR-F","s":"mcp-error-responses","t":"Lỗi tool có cấu trúc","q":["cca1-015","cca2-019","cca2-020"]},{"c":"ccarp","code":"CCAR-P","s":"system-prompt-guardrail-design","t":"Thiết kế system prompt và guardrail","q":["ccarp-029","ccarp-030","ccarp-031","ccarp-032"]},{"c":"ccdv","code":"CCDV-F","s":"systems-life-cycle","t":"Vòng đời hệ thống của một ứng dụng Claude","q":["ccdv-067","ccdv-068","ccdv-069","ccdv-070"]},{"c":"ccao","code":"CCAO-F","s":"fact-checking-technique","t":"Kỹ thuật kiểm chứng bạn tự làm được","q":["ccao-028","ccao-031","ccao-033","ccao-034","ccao-036"]},{"c":"ccarf","code":"CCAR-F","s":"scoped-tool-choice","t":"Phân bổ tool và tool_choice","q":["cca1-074","cca2-021","cca1-018","cca2-022","cca1-027","cca1-029"]},{"c":"ccarp","code":"CCAR-P","s":"prompt-technique-selection","t":"Chọn đúng kỹ thuật prompt","q":["ccarp-033","ccarp-034","ccarp-035"]},{"c":"ccdv","code":"CCDV-F","s":"messages-api-tool-use","t":"Messages API và tool use","q":["ccdv-047","ccdv-048","ccdv-049","ccdv-050","ccdv-051","ccdv-052","ccdv-053","ccdv-054","ccdv-055","ccdv-056"]},{"c":"ccao","code":"CCAO-F","s":"when-human-review-needed","t":"Khi nào đầu ra cần người ký duyệt","q":["ccao-038","ccao-039","ccao-040","ccao-041","ccao-042"]},{"c":"ccarf","code":"CCAR-F","s":"mcp-server-scoping","t":"Tích hợp MCP server","q":["cca1-039","cca1-075","cca2-024","cca2-025","cca2-023"]},{"c":"ccarp","code":"CCAR-P","s":"context-window-budgeting","t":"Quản lý context window và ngân sách token","q":["ccarp-036","ccarp-038","ccarp-040","ccarp-042","ccarp-044"]},{"c":"ccdv","code":"CCDV-F","s":"software-engineering-foundations","t":"Nền tảng kỹ thuật phần mềm đứng sau một ứng dụng Claude","q":["ccdv-036","ccdv-037","ccdv-038","ccdv-039","ccdv-040","ccdv-041","ccdv-042","ccdv-043","ccdv-044","ccdv-045"]},{"c":"ccao","code":"CCAO-F","s":"adapting-for-audience","t":"Cùng nội dung, đúng đối tượng đọc","q":["ccao-043","ccao-044","ccao-045","ccao-046","ccao-047","ccao-048"]},{"c":"ccarf","code":"CCAR-F","s":"builtin-tool-selection","t":"Tool có sẵn: Grep, Glob, Edit","q":["cca1-061","cca1-062","cca2-026","cca2-027","cca1-063"]},{"c":"ccarp","code":"CCAR-P","s":"prompt-reuse-caching-skills","t":"Tái dùng prompt: caching, prompt modular, Skill","q":["ccarp-037","ccarp-039","ccarp-041","ccarp-043","ccarp-045"]},{"c":"ccdv","code":"CCDV-F","s":"claude-application-design","t":"Thiết kế xuyên giao diện, ranh giới nội dung, và schema","q":["ccdv-023","ccdv-024","ccdv-025","ccdv-026","ccdv-027","ccdv-028","ccdv-029","ccdv-030","ccdv-031","ccdv-032","ccdv-033","ccdv-034","ccdv-035"]},{"c":"ccao","code":"CCAO-F","s":"choosing-output-format","t":"Chọn đúng định dạng đầu ra","q":["ccao-049","ccao-050","ccao-051","ccao-052","ccao-053"]},{"c":"ccdv","code":"CCDV-F","s":"configuration-management","t":"Quản lý cấu hình: settings, phiên bản, plugin","q":["ccdv-060","ccdv-061","ccdv-062","ccdv-063","ccdv-064","ccdv-065","ccdv-066"]},{"c":"ccao","code":"CCAO-F","s":"choosing-the-right-feature","t":"Chat, Project, Artifact, hay research mode","q":["ccao-054","ccao-055","ccao-056","ccao-057","ccao-058"]},{"c":"ccarf","code":"CCAR-F","s":"claude-md-hierarchy","t":"Phân cấp CLAUDE.md và tổ chức module","q":["cca1-037","cca1-042","cca2-028","cca2-029"]},{"c":"ccarp","code":"CCAR-P","s":"capability-bloat","t":"Rà soát cấu hình tool để tránh capability bloat","q":["ccarp-046","ccarp-049","ccarp-052"]},{"c":"ccdv","code":"CCDV-F","s":"claude-code-operation","t":"Vận hành Claude Code","q":["ccdv-073","ccdv-074","ccdv-075","ccdv-076","ccdv-077"]},{"c":"ccao","code":"CCAO-F","s":"haiku-sonnet-opus","t":"Khác biệt thật: Haiku, Sonnet, Opus","q":["ccao-059","ccao-060","ccao-062"]},{"c":"ccarf","code":"CCAR-F","s":"slash-commands-skills","t":"Slash command và skill tuỳ biến","q":["cca1-035","cca1-045","cca2-030","cca2-031","cca1-031","cca1-036","cca1-038","cca1-043","cca1-044"]},{"c":"ccarp","code":"CCAR-P","s":"auth-authz-gaps","t":"Tìm lỗ hổng authentication và authorization","q":["ccarp-047","ccarp-050","ccarp-053","ccarp-055"]},{"c":"ccao","code":"CCAO-F","s":"matching-model-to-task","t":"Chọn dòng model cho đúng tác vụ này, không phải theo thói quen","q":["ccao-061","ccao-063","ccao-064","ccao-065","ccao-066","ccao-067"]},{"c":"ccarf","code":"CCAR-F","s":"path-specific-rules","t":"Rule theo đường dẫn để nạp có điều kiện","q":["cca1-033","cca2-032","cca2-033"]},{"c":"ccarp","code":"CCAR-P","s":"accuracy-latency-tradeoff","t":"Cân đối độ chính xác và độ trễ","q":["ccarp-048","ccarp-051","ccarp-054"]},{"c":"ccao","code":"CCAO-F","s":"managing-context","t":"Khi nào nên mở lại, tóm tắt, hay lưu lâu dài","q":["ccao-068","ccao-069","ccao-070","ccao-071"]},{"c":"ccarf","code":"CCAR-F","s":"plan-mode-vs-direct","t":"Plan mode và direct execution","q":["cca1-032","cca1-065","cca1-066","cca2-035","cca1-040","cca2-034"]},{"c":"ccarp","code":"CCAR-P","s":"observability-at-scale","t":"Chọn chiến lược giám sát mở rộng theo quy mô","q":["ccarp-058","ccarp-061"]},{"c":"ccarf","code":"CCAR-F","s":"iterative-refinement","t":"Kỹ thuật tinh chỉnh lặp","q":["cca1-041","cca1-068","cca1-069","cca2-036","cca2-037"]},{"c":"ccarp","code":"CCAR-P","s":"rag-retrieval","t":"Thiết kế RAG / retrieval","q":["ccarp-056","ccarp-060","ccarp-057","ccarp-063"]},{"c":"ccarf","code":"CCAR-F","s":"cicd-integration","t":"Claude Code trong pipeline CI/CD","q":["cca1-046","cca1-052","cca2-038","cca2-039","cca1-051"]},{"c":"ccarp","code":"CCAR-P","s":"retrieval-strategy-fit","t":"Khớp chiến lược truy hồi với dữ liệu và câu hỏi","q":["ccarp-059","ccarp-062","ccarp-064"]},{"c":"ccarp","code":"CCAR-P","s":"connection-protocols","t":"Chọn MCP, API trực tiếp, hay agent-to-agent","q":["ccarp-065","ccarp-066","ccarp-067","ccarp-068","ccarp-069"]},{"c":"ccarp","code":"CCAR-P","s":"progressive-discovery","t":"Progressive discovery và context monolithic","q":["ccarp-070","ccarp-071","ccarp-072","ccarp-073"]},{"c":"ccao","code":"CCAO-F","s":"requirements-and-use-cases","t":"Tìm ra thứ thực sự cần","q":["ccao-072","ccao-073","ccao-074","ccao-075"]},{"c":"ccarf","code":"CCAR-F","s":"explicit-criteria-precision","t":"Tiêu chí tường minh và giảm báo động giả","q":["cca1-054","cca1-056","cca1-058","cca1-060","cca2-040","cca2-041"]},{"c":"ccarp","code":"CCAR-P","s":"eval-metrics-definition","t":"Định nghĩa chỉ số đánh giá","q":["ccarp-074","ccarp-075","ccarp-076","ccarp-077"]},{"c":"ccdv","code":"CCDV-F","s":"debugging-error-handling","t":"Gỡ lỗi và xử lý lỗi","q":["ccdv-078","ccdv-079","ccdv-080","ccdv-081"]},{"c":"ccao","code":"CCAO-F","s":"research-planning-optimization","t":"Nghiên cứu, lập kế hoạch, và cắt phần dư thừa","q":["ccao-076","ccao-077","ccao-078","ccao-079","ccao-088"]},{"c":"ccarf","code":"CCAR-F","s":"few-shot-consistency","t":"Few-shot prompting để nhất quán","q":["cca1-059","cca1-085","cca2-042","cca2-043"]},{"c":"ccarp","code":"CCAR-P","s":"eval-harness","t":"Dựng bộ eval","q":["ccarp-078","ccarp-079","ccarp-080","ccarp-081"]},{"c":"ccao","code":"CCAO-F","s":"solution-design-iteration","t":"Nháp, thử nghiệm, tinh chỉnh","q":["ccao-080","ccao-081","ccao-086"]},{"c":"ccarf","code":"CCAR-F","s":"prompt-structured-output","t":"Prompt engineering và đầu ra có cấu trúc","q":["cca2-044","cca2-045","cca1-055","cca1-076","cca1-077","cca1-079","cca1-080","cca1-081"]},{"c":"ccarp","code":"CCAR-P","s":"ab-testing-and-iteration","t":"A/B testing và cải tiến lặp","q":["ccarp-082","ccarp-083","ccarp-084","ccarp-085"]},{"c":"ccao","code":"CCAO-F","s":"integrate-and-redesign-workflows","t":"Đặt Claude đúng vào quy trình thật","q":["ccao-082","ccao-084","ccao-085","ccao-087","ccao-089"]},{"c":"ccarf","code":"CCAR-F","s":"validation-retry-feedback","t":"Validation, retry và vòng phản hồi","q":["cca1-078","cca1-082","cca1-083","cca1-084","cca2-046","cca2-047"]},{"c":"ccarp","code":"CCAR-P","s":"diagnosing-system-issues","t":"Chẩn đoán lỗi hệ thống","q":["ccarp-086","ccarp-089","ccarp-092","ccarp-095"]},{"c":"ccao","code":"CCAO-F","s":"communicate-value-and-limits","t":"Nói thật với các bên liên quan về Claude","q":["ccao-083","ccao-090","ccao-091","ccao-092","ccao-093","ccao-094","ccao-095"]},{"c":"ccarf","code":"CCAR-F","s":"batch-processing-strategy","t":"Chiến lược xử lý theo batch","q":["cca1-047","cca1-049","cca1-050","cca1-057","cca1-086","cca1-087","cca2-048","cca2-049"]},{"c":"ccarp","code":"CCAR-P","s":"cost-latency-optimization","t":"Tối ưu token, độ trễ và chi phí","q":["ccarp-088","ccarp-091","ccarp-094","ccarp-097"]},{"c":"ccarf","code":"CCAR-F","s":"multi-instance-review","t":"Review đa instance và đa pass","q":["cca1-013","cca1-053","cca2-050","cca2-051"]},{"c":"ccarp","code":"CCAR-P","s":"observability-and-monitoring","t":"Giám sát bằng logging và observability","q":["ccarp-087","ccarp-090","ccarp-093","ccarp-096"]},{"c":"ccao","code":"CCAO-F","s":"project-instructions-and-knowledge","t":"Một lần thiết lập, dùng cho mọi chat","q":["ccao-096","ccao-097","ccao-098","ccao-099"]},{"c":"ccarf","code":"CCAR-F","s":"case-facts-context","t":"Quản lý ngữ cảnh trong hội thoại dài","q":["cca1-014","cca1-030","cca2-055","cca1-090","cca1-067","cca1-073"]},{"c":"ccarp","code":"CCAR-P","s":"guardrails-safety-controls","t":"Guardrail và kiểm soát an toàn","q":["ccarp-098","ccarp-099","ccarp-100","ccarp-101"]},{"c":"ccdv","code":"CCDV-F","s":"next-token-generation-basics","t":"Token và sinh next-token","q":["ccdv-091","ccdv-096","ccdv-098","ccdv-106"]},{"c":"ccao","code":"CCAO-F","s":"connectors-vs-static-uploads","t":"Tải tĩnh hay kết nối sống","q":["ccao-101","ccao-102","ccao-103","ccao-104","ccao-105"]},{"c":"ccarf","code":"CCAR-F","s":"escalation-ambiguity","t":"Escalation và xử lý nhập nhằng","q":["cca1-003","cca1-005","cca2-056"]},{"c":"ccarp","code":"CCAR-P","s":"llm-failure-modes","t":"Rủi ro và kiểu lỗi hệ thống","q":["ccarp-102","ccarp-103","ccarp-104","ccarp-105"]},{"c":"ccdv","code":"CCDV-F","s":"realtime-vs-batch-mechanics","t":"Realtime và batch: cơ chế tích hợp API","q":["ccdv-095","ccdv-097","ccdv-099","ccdv-102","ccdv-105"]},{"c":"ccao","code":"CCAO-F","s":"specific-not-vague-instructions","t":"Cụ thể thắng chung chung","q":["ccao-100","ccao-106","ccao-107","ccao-108","ccao-109"]},{"c":"ccarf","code":"CCAR-F","s":"error-propagation-recovery","t":"Lan truyền lỗi trong hệ nhiều agent","q":["cca1-017","cca1-022","cca1-024","cca1-026","cca1-028","cca2-057"]},{"c":"ccarp","code":"CCAR-P","s":"human-in-the-loop-validation","t":"Xác thực có con người trong vòng lặp","q":["ccarp-106","ccarp-107","ccarp-108"]},{"c":"ccdv","code":"CCDV-F","s":"model-tier-tradeoffs","t":"Haiku, Sonnet, Opus: chọn cấp model","q":["ccdv-082","ccdv-083","ccdv-085","ccdv-089","ccdv-090","ccdv-093","ccdv-084","ccdv-086","ccdv-087","ccdv-088","ccdv-092"]},{"c":"ccao","code":"CCAO-F","s":"keeping-configuration-current","t":"Giữ Project luôn cập nhật","q":["ccao-110","ccao-111","ccao-112","ccao-113"]},{"c":"ccarf","code":"CCAR-F","s":"codebase-exploration-context","t":"Quản lý ngữ cảnh khi khám phá codebase lớn","q":["cca1-034","cca1-064","cca2-052","cca2-053","cca2-054"]},{"c":"ccarp","code":"CCAR-P","s":"regulatory-compliance","t":"Tuân thủ: GDPR, HIPAA, FedRAMP","q":["ccarp-109","ccarp-110","ccarp-111","ccarp-112","ccarp-113"]},{"c":"ccdv","code":"CCDV-F","s":"prompt-caching-and-token-budget","t":"Prompt caching và ngân sách token","q":["ccdv-094","ccdv-100","ccdv-101","ccdv-103","ccdv-104"]},{"c":"ccarf","code":"CCAR-F","s":"confidence-calibration-review","t":"Quy trình human review và hiệu chỉnh độ tin cậy","q":["cca1-088","cca1-089","cca2-058"]},{"c":"ccarp","code":"CCAR-P","s":"ethical-ai-considerations","t":"AI có đạo đức: thiên lệch, công bằng, minh bạch","q":["ccarp-114","ccarp-115","ccarp-116","ccarp-117","ccarp-118"]},{"c":"ccarf","code":"CCAR-F","s":"provenance-multi-source-synthesis","t":"Nguồn gốc và độ bất định khi tổng hợp đa nguồn","q":["cca2-059","cca2-060"]},{"c":"ccao","code":"CCAO-F","s":"when-not-to-use","t":"Khi nào không nên dùng Claude","q":["ccao-114","ccao-115","ccao-116","ccao-134","ccao-117","ccao-118","ccao-119"]},{"c":"ccarp","code":"CCAR-P","s":"structured-discovery","t":"Discovery và thu thập yêu cầu có cấu trúc","q":["ccarp-119","ccarp-120","ccarp-121","ccarp-122"]},{"c":"ccdv","code":"CCDV-F","s":"context-window-management","t":"Quản lý context window","q":["ccdv-107","ccdv-108","ccdv-109","ccdv-110","ccdv-111"]},{"c":"ccao","code":"CCAO-F","s":"data-sensitivity-before-sharing","t":"Trước khi dán vào","q":["ccao-120","ccao-121","ccao-122","ccao-123","ccao-124"]},{"c":"ccarp","code":"CCAR-P","s":"trade-off-communication","t":"Truyền đạt quyết định kiến trúc và đánh đổi","q":["ccarp-123","ccarp-124","ccarp-125","ccarp-126"]},{"c":"ccdv","code":"CCDV-F","s":"prompt-structure-and-constraints","t":"Dựng prompt để Claude không hiểu nhầm","q":["ccdv-112","ccdv-113","ccdv-114","ccdv-115","ccdv-117","ccdv-118","ccdv-116"]},{"c":"ccao","code":"CCAO-F","s":"following-ai-governance","t":"Đưa qua đúng kênh chính sách","q":["ccao-125","ccao-126","ccao-127","ccao-128","ccao-129","ccao-130"]},{"c":"ccarp","code":"CCAR-P","s":"feedback-loops-sla","t":"Vòng phản hồi với stakeholder và căn chỉnh SLA","q":["ccarp-127","ccarp-128","ccarp-129"]},{"c":"ccdv","code":"CCDV-F","s":"structured-output-and-validation","t":"Tạo output mà code bạn có thể tin","q":["ccdv-119","ccdv-120","ccdv-121","ccdv-122"]},{"c":"ccao","code":"CCAO-F","s":"ethics-of-ai-use","t":"Trôi chảy không đồng nghĩa với công bằng","q":["ccao-131","ccao-132","ccao-133","ccao-135"]},{"c":"ccarp","code":"CCAR-P","s":"architecture-documentation","t":"Tài liệu hoá kiến trúc và implementation guidance","q":["ccarp-130","ccarp-131","ccarp-132","ccarp-133","ccarp-134"]},{"c":"ccarp","code":"CCAR-P","s":"lifecycle-phases","t":"Hỗ trợ vòng đời: từ discovery tới iteration","q":["ccarp-135","ccarp-136","ccarp-137","ccarp-138","ccarp-139"]},{"c":"ccao","code":"CCAO-F","s":"diagnosing-poor-output","t":"Tìm ra vì sao đầu ra bị sai","q":["ccao-136","ccao-137","ccao-138","ccao-139","ccao-140"]},{"c":"ccarp","code":"CCAR-P","s":"team-tooling-configuration","t":"Cấu hình công cụ Claude cho cả đội","q":["ccarp-140","ccarp-141","ccarp-142","ccarp-143"]},{"c":"ccdv","code":"CCDV-F","s":"untrusted-input-defense","t":"Nội dung không đáng tin và chống prompt injection","q":["ccdv-123","ccdv-124","ccdv-125","ccdv-126","ccdv-127"]},{"c":"ccao","code":"CCAO-F","s":"adjusting-from-feedback","t":"Biến phản hồi lặp lại thành cách làm mới","q":["ccao-141","ccao-142","ccao-143","ccao-144","ccao-145"]},{"c":"ccarp","code":"CCAR-P","s":"ai-assisted-dev-workflow","t":"Đưa công cụ AI hỗ trợ vào workflow lập trình","q":["ccarp-144","ccarp-145","ccarp-146","ccarp-147"]},{"c":"ccdv","code":"CCDV-F","s":"guardrail-layering","t":"Xếp lớp guardrail và least privilege","q":["ccdv-128","ccdv-129","ccdv-130"]},{"c":"ccao","code":"CCAO-F","s":"optimizing-workflows","t":"Tối ưu cả quy trình quanh Claude","q":["ccao-146","ccao-147","ccao-148","ccao-149","ccao-150"]},{"c":"ccarp","code":"CCAR-P","s":"debugging-operational-support","t":"Hỗ trợ debug và xử lý sự cố vận hành","q":["ccarp-148","ccarp-149","ccarp-150"]},{"c":"ccdv","code":"CCDV-F","s":"hook-safety-controls","t":"Hook như một kiểm soát an toàn","q":["ccdv-131","ccdv-132"]},{"c":"ccdv","code":"CCDV-F","s":"secrets-and-key-management","t":"Định danh, secret và quản lý khoá","q":["ccdv-133","ccdv-134"]},{"c":"ccdv","code":"CCDV-F","s":"tool-schema-and-errors","t":"Schema tool, tool_choice và xử lý lỗi","q":["ccdv-135","ccdv-136","ccdv-137","ccdv-138","ccdv-140","ccdv-141","ccdv-139"]},{"c":"ccdv","code":"CCDV-F","s":"mcp","t":"Kiến trúc MCP","q":["ccdv-142","ccdv-143","ccdv-144","ccdv-146","ccdv-148"]},{"c":"ccdv","code":"CCDV-F","s":"tool-skill-mcp-tradeoffs","t":"Built-in tool, custom tool, Skill và MCP","q":["ccdv-145","ccdv-147","ccdv-149","ccdv-150"]}];
   function get(k){ try{ return JSON.parse(localStorage.getItem(k)); }catch(e){ return null; } }
   function esc(t){ return String(t==null?"":t).replace(/[&<>"]/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c];}); }
@@ -220,7 +225,15 @@ a{color:inherit}
     th=dark?"light":"dark"; applyTheme(th); try{ localStorage.setItem(TK,th); }catch(e){}
   };
 
-  // tiến độ từng app luyện đề
+  // mở Labs đúng tab + đúng đề: ghi trạng thái Labs trước khi chuyển trang
+  function openLearn(view,cert){
+    try{ var k="learn-console-v1", s=get(k)||{}; s.view=view; if(cert) s.cert=cert; localStorage.setItem(k,JSON.stringify(s)); }catch(e){}
+  }
+  Array.prototype.forEach.call(document.querySelectorAll("[data-learn]"),function(a){
+    a.addEventListener("click",function(){ var p=a.getAttribute("data-learn").split("|"); openLearn(p[0],p[1]); });
+  });
+
+  // tiến độ từng đề luyện
   var lives=[];
   APPS.forEach(function(a){
     var row=document.querySelector('[data-app="'+a.slug+'"]'); if(!row) return;
@@ -242,7 +255,12 @@ a{color:inherit}
       lives.push({a:a, live:live});
     } else if(attempts){
       var last=hist[hist.length-1];
-      st.innerHTML=(last&&last.pct!=null?"Lần gần nhất <b>"+last.pct+"%</b>"+(last.n?" ("+last.c+"/"+last.n+" câu)":"")+" · ":"")+attempts+" lượt đã làm";
+      st.innerHTML=(last&&last.pct!=null?"Luyện đề: lần gần nhất <b>"+last.pct+"%</b>"+(last.n?" ("+last.c+"/"+last.n+" câu)":"")+" · ":"")+attempts+" lượt";
+    }
+    if(a.inLabs && LABS.length){
+      var la=get("learn-answers-v1")||{}, mine=LABS.filter(function(l){ return l.c===a.slug; });
+      var dn=mine.filter(function(l){ return l.q.length>0 && l.q.every(function(id){ return la[id]; }); }).length;
+      if(dn) st.innerHTML+=" · đã học <b>"+dn+"/"+mine.length+"</b> bài";
     }
   });
   // thẻ "làm tiếp": bài đang dở mới nhất
@@ -250,9 +268,10 @@ a{color:inherit}
   if(lives[0]){
     var L=lives[0], el=document.getElementById("resume");
     el.innerHTML='<div class="t"><span class="k">Đang làm dở</span><h2>'+esc(L.a.code)+' · câu '+L.live.cur+'/'+L.live.n+'</h2>'
-      +'<span class="m">Đã trả lời '+L.live.done+' câu · mở app sẽ thấy nút làm tiếp</span></div>'
-      +'<a class="btn primary" href="'+L.a.file+'">Làm tiếp →</a>';
+      +'<span class="m">Đã trả lời '+L.live.done+' câu · '+(L.a.inLabs?'mở Labs → Luyện đề sẽ thấy nút làm tiếp':'mở app sẽ thấy nút làm tiếp')+'</span></div>'
+      +'<a class="btn primary" href="'+L.a.file+'"'+(L.a.inLabs?' data-learn="practice|'+L.a.slug+'"':'')+'>Làm tiếp →</a>';
     el.hidden=false;
+    var rb=el.querySelector("[data-learn]"); if(rb) rb.addEventListener("click",function(){ openLearn("practice",L.a.slug); });
   }
 
   // tiến độ Labs: bài xong = đã trả lời hết câu của bài

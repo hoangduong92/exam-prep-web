@@ -16,10 +16,10 @@
 ## Có gì
 
 - **LABS** — Claude Cert Labs (Học theo exam guide · CCAO · CCDV · CCAR-F · CCAR-P) · 123 bài
-- **CCAO-F** — Claude Certified Associate (Foundations) · 150 câu
-- **CCDV-F** — Claude Certified Developer (Foundations) · 150 câu
-- **CCAR-F** — Claude Certified Architect (Foundations) · 150 câu
-- **CCAR-P** — Claude Certified Architect (Professional) · 150 câu
+- **CCAO-F** — Claude Certified Associate (Foundations) · 150 câu — học + luyện đề trong Labs
+- **CCDV-F** — Claude Certified Developer (Foundations) · 150 câu — học + luyện đề trong Labs
+- **CCAR-F** — Claude Certified Architect (Foundations) · 150 câu — học + luyện đề trong Labs
+- **CCAR-P** — Claude Certified Architect (Professional) · 150 câu — học + luyện đề trong Labs
 - **ANS-C01** — AWS Advanced Networking (Specialty) · 326 câu
 
 Tiến độ luyện được lưu ngay trên máy bạn. Trang này tự sinh từ `web/build-site.mjs` (repo nguồn private); cập nhật bằng `node web/deploy.mjs`.
