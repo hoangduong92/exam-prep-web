@@ -1,5 +1,5 @@
 // Tự sinh bởi web/build-site.mjs — đừng sửa tay.
-const CACHE = 'luyende-83ee5f9c35';
+const CACHE = 'luyende-4b5033f6e7';
 const ASSETS = ["index.html","manifest.webmanifest","icon-192.png","icon-512.png","apple-touch-icon.png","learn.html","ans-c01.html","ccao.html","ccdv.html","ccarf.html","ccarp.html"];
 self.addEventListener('install', e => {
   e.waitUntil(caches.open(CACHE).then(c => c.addAll(ASSETS.map(a => new Request(a, {cache:'reload'})))).then(() => self.skipWaiting()));
