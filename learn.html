@@ -173,10 +173,14 @@ body.pv-on{overflow:hidden}
 .rdom{display:flex;align-items:center;gap:8px;width:100%;border:0;background:transparent;text-align:left;padding:8px 8px;border-radius:var(--r-sm);color:var(--ink-3);font-size:13px;font-weight:500;line-height:1.35}
 .rdom:hover{background:var(--surface-2);color:var(--ink-2)}
 .rdom .dname{flex:1;min-width:0}
+.dw{display:flex;align-items:center;gap:8px;margin-top:4px;font-size:11.5px;font-weight:500;color:var(--ink-3);font-family:var(--mono)}
+.dwt{flex:none;width:44px;height:4px;border-radius:var(--r-pill);background:var(--surface-2);overflow:hidden}
+.dwt i{display:block;height:100%;border-radius:inherit}
+.dw b{font-weight:500}
 .rdom .dn{font-size:12px;color:var(--ink-3)}
 .rdom .chev{color:var(--ink-3);font-size:15px;line-height:1}
 .dlabel{font-size:12.5px;color:var(--ink-2);font-weight:700;padding:8px 8px 4px;line-height:1.35;display:flex;gap:8px}
-.dlabel span:first-child{flex:1}
+.dlabel>span:first-child{flex:1}
 .dlabel .dn{font-weight:500;color:var(--ink-3)}
 .rlab{display:grid;grid-template-columns:18px minmax(0,1fr);gap:9px;align-items:start;padding:7px 8px;border-radius:var(--r-sm);font-size:13.5px;color:var(--ink-2);line-height:1.4;border:0;background:none;text-align:left;width:100%}
 .rlab:hover{background:var(--surface-2);color:var(--ink)}
@@ -389,6 +393,15 @@ figure.paused .dg-flow,figure.paused .dg-node,figure.paused .dg-em{animation-pla
   .jump a.on{background:var(--ink);border-color:var(--ink);color:var(--ground)}
   .sec{scroll-margin-top:calc(var(--bar-h) + 64px)}
   .qcard{scroll-margin-top:calc(var(--bar-h) + 64px)}
+}
+/* máy tính bảng / cửa sổ hẹp: 5 tab + công cụ không vừa một hàng → bỏ icon, giữ chữ một dòng */
+@media (min-width:761px) and (max-width:1000px){
+  .tabs{margin-left:4px}
+  .tabs button{padding:0 6px;font-size:13.5px;white-space:nowrap}
+  .tabs button svg{display:none}
+}
+@media (min-width:761px) and (max-width:860px){
+  .tabs button{padding:0 4px}
 }
 /* ── điện thoại: đầu trang một dòng, ẩn khi cuộn xuống; tab chuyển trang xuống đáy ── */
 @media (max-width:760px){
@@ -1376,10 +1389,13 @@ window.REVIEW_MAP = {
         +'<span class="rt-t">'+esc(T(lab.title))+'</span><span class="chev">'+(railListOpen?L("Close ▴","Đóng ▴"):L("All labs ▾","Danh sách ▾"))+'</span></button>';
     }
     var byDom={}; ls.forEach(function(l){ (byDom[l.domain]=byDom[l.domain]||[]).push(l); });
-    var cur=lab?String(lab.domain):null, list="";
+    var cur=lab?String(lab.domain):null, list="", doms=D.certs[state.cert].domains||{};
+    var wMax=Math.max.apply(null, Object.keys(doms).map(function(k){ return +doms[k].w||0; }).concat(1));
     Object.keys(byDom).sort(function(a,b){return a-b;}).forEach(function(d){
       var g=byDom[d], dn=g.filter(function(l){ return labStat(l).done; }).length;
-      var name='D'+d+' · '+esc(T(g[0].domainLabel));
+      var name='D'+d+' · '+esc(T(g[0].domainLabel)), w=doms[d]&&+doms[d].w;
+      // trọng số domain trong đề thật: thanh ngắn tỉ lệ theo domain nặng nhất + số %
+      if(w) name+='<span class="dw"><span class="dwt"><i style="width:'+Math.round(w/wMax*100)+'%;background:'+EXAM_COLOR[state.cert]+'"></i></span><b>'+w+'% '+L("of exam","đề thi")+'</b></span>';
       if(d!==cur && !railOpen[state.cert+d]){
         list+='<div class="rgroup"><button class="rdom" data-dom="'+d+'"><span class="dname">'+name+'</span><span class="dn">'+dn+'/'+g.length+'</span><span class="chev" aria-hidden="true">›</span></button></div>';
         return;
