@@ -1597,7 +1597,11 @@ window.REVIEW_MAP = {
       am.setAttribute("dur", dur.toFixed(2)+"s"); am.setAttribute("begin", begin);
       am.setAttribute("keyPoints","0;1;1"); am.setAttribute("keyTimes","0;"+(1-REST).toFixed(3)+";1");
       am.setAttribute("calcMode","linear"); am.setAttribute("repeatCount","indefinite");
-      c.appendChild(am); layer.appendChild(c);
+      // hạt đi sau (begin > 0) ẩn cho tới lượt, không thì nó nằm chờ ở góc (0,0) của sơ đồ
+      c.setAttribute("visibility","hidden");
+      var sv=document.createElementNS(NS,"set");
+      sv.setAttribute("attributeName","visibility"); sv.setAttribute("to","visible"); sv.setAttribute("begin",begin); sv.setAttribute("fill","freeze");
+      c.appendChild(am); c.appendChild(sv); layer.appendChild(c);
     });
     host.removeChild(probe);
     svg.setAttribute("data-routes", routes.length);
