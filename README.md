@@ -21,10 +21,10 @@
 - **CCAR-F** — Claude Certified Architect (Foundations) · 72 câu — học + luyện đề trong Labs
 - **CCAR-P** — Claude Certified Architect (Professional) · 150 câu — học + luyện đề trong Labs
 - **ANS-C01** — AWS Advanced Networking (Specialty) · 326 câu
-- **PMP** — PMP Exam Lab 2026 (ECO 2026 · Labs · Flashcards) · 226 câu
+- **PMP** — PMP Exam Lab 2026 (ECO 2026 · Labs · Flashcards) · 500 câu
 
 Trang ôn thi cá nhân, không liên kết với Anthropic hay AWS. Câu luyện đề chứng chỉ Claude do AI soạn theo Exam Guide công khai, không phải đề thật; riêng 12 câu mẫu CCAR-F trích nguyên từ Exam Guide.
 
-Ngân hàng PMP gồm 200 câu tham khảo từ **“200 Ultra Hard PMP Questions”** của **Andrew Ramdayal / Technical Institute of America** và 26 câu nguyên bản theo ECO 2026. Trong app, mỗi câu tham khảo có link về đúng timestamp của [video nguồn](https://www.youtube.com/watch?v=1sWpc6765AI). Đây là tài liệu ôn tập, không phải đề thi PMP chính thức.
+Ngân hàng PMP gồm 200 câu tham khảo từ **“200 Ultra Hard PMP Questions”** của **Andrew Ramdayal / Technical Institute of America** và 300 câu nguyên bản theo ECO 2026. Trong app, mỗi câu tham khảo có link về đúng timestamp của [video nguồn](https://www.youtube.com/watch?v=1sWpc6765AI). Đây là tài liệu ôn tập, không phải đề thi PMP chính thức.
 
 Tiến độ luyện được lưu ngay trên máy bạn. Trang này tự sinh từ `web/build-site.mjs` (repo nguồn private); cập nhật bằng `node web/deploy.mjs`.
