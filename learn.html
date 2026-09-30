@@ -353,6 +353,27 @@ figure.paused .dg-flow,figure.paused .dg-node,figure.paused .dg-em{animation-pla
 .seg button{border:0;background:transparent;color:var(--ink-3);font-weight:600;font-size:13px;padding:6px 12px;border-radius:var(--r-sm);white-space:nowrap}
 .seg button.on{background:var(--ink);color:var(--ground)}
 .fc-count{margin-left:auto;font-size:12.5px;color:var(--ink-3);display:flex;align-items:center;gap:12px}
+.fc-spk{display:inline-flex;align-items:center;gap:7px;height:36px;padding:0 12px;border-radius:var(--r-md);border:1px solid var(--line-2);background:var(--surface);color:var(--ink-2);font-weight:600;font-size:13px}
+.fc-spk b{font-weight:700;color:var(--acc-text)}
+.fc-spk.on{background:var(--acc-soft);border-color:var(--acc);color:var(--acc-text)}
+.sp-histbar{display:flex;align-items:center;gap:10px;flex-wrap:wrap;border-top:1px solid var(--line);padding-top:10px}
+.sp-histbtn{display:inline-flex;align-items:center;gap:8px;border:0;background:none;padding:4px 0;color:var(--ink-2);font-size:13.5px;font-weight:600;text-align:left}
+.sp-histbtn svg{transition:transform .15s;color:var(--ink-3)}
+.sp-histbtn[aria-expanded="true"] svg{transform:rotate(90deg)}
+.sp-histbtn:hover{color:var(--ink)}
+.sp-hsum{font-size:13px;color:var(--ink-3)}
+.sp-hsum b{color:var(--ink);font-weight:700;font-variant-numeric:tabular-nums}
+.sp-top5{display:flex;flex-wrap:wrap;gap:6px}
+.sp-top5 span{font-family:var(--mono);font-size:13px;padding:1px 8px;border-radius:var(--r-sm);background:var(--bad-soft);color:var(--bad)}
+.sp-hist{background:var(--surface-2);border-radius:var(--r-md);padding:12px 14px;display:flex;flex-direction:column;gap:10px}
+.sp-hh{font-size:12px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-3)}
+.sp-hl{margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:10px}
+.sp-hl li{display:grid;grid-template-columns:auto 1fr;gap:2px 12px;align-items:baseline}
+.sp-hl .ph{font-family:var(--mono);font-size:16px;font-weight:700;color:var(--bad);min-width:44px}
+.sp-hl .what{font-size:14px;color:var(--ink)}
+.sp-hl .what em{color:var(--ink-3);font-style:normal;font-variant-numeric:tabular-nums}
+.sp-hl .sp-how{grid-column:2}
+.sp-hnext{font-size:13.5px;color:var(--ink-2)}
 .fc-reset{border:0;background:transparent;color:var(--acc-text);font-weight:600;font-size:13px;text-decoration:underline;padding:4px}
 .flash{perspective:1600px}
 .card3d{position:relative;display:grid;width:100%;min-height:320px;cursor:pointer;transition:transform .5s;transform-style:preserve-3d}
@@ -403,6 +424,67 @@ mark.tw{background:var(--acc-soft);color:var(--acc-text);font-weight:600;border-
 .fc-done .big{width:52px;height:52px;border-radius:50%;background:var(--ok-soft);color:var(--ok);display:grid;place-items:center;margin:0 auto 16px}
 .fc-done h2{font-size:22px;margin-bottom:8px}
 .fc-done p{color:var(--ink-3);margin-bottom:18px}
+
+/* ── luyện nói (pron.js): nằm ngoài thẻ nên không lật theo thẻ ── */
+.crow{grid-template-columns:24px 1fr auto auto}
+.cplay{width:28px;height:28px;border-radius:50%;border:1px solid var(--line-2);background:var(--surface);color:var(--acc-text);display:grid;place-items:center;padding:0;margin-top:-2px}
+.cplay:hover{border-color:var(--acc);background:var(--acc-soft)}
+.speak{margin-top:14px;border:1px solid var(--line);border-radius:var(--r-lg);background:var(--surface);padding:14px 18px 16px;display:flex;flex-direction:column;gap:12px}
+.sp-top{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.sp-lab{font-size:11.5px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-3)}
+.sp-listen{display:flex;gap:8px;margin-left:auto}
+.sp-btn{display:inline-flex;align-items:center;gap:6px;height:34px;padding:0 12px;border-radius:var(--r-md);border:1px solid var(--line-2);background:var(--surface);color:var(--ink);font-size:13.5px;font-weight:600}
+.sp-btn:hover{border-color:var(--ink-3)}
+.sp-btn svg{color:var(--acc-text)}
+.sp-pron{display:flex;flex-wrap:wrap;align-items:baseline;gap:6px 14px}
+.sp-ipa{font-family:"Segoe UI","Lucida Sans Unicode","Noto Sans","DejaVu Sans",var(--body);font-size:16px;color:var(--ink);letter-spacing:.01em}
+.sp-ipa .bad{color:var(--bad);font-weight:700;text-decoration:underline;text-decoration-thickness:2px;text-underline-offset:3px}
+.sp-syl{font-size:15px;color:var(--ink-2);letter-spacing:.02em}
+.sp-syl b{color:var(--acc-text);font-weight:800;text-transform:uppercase}
+.sp-say,.sp-note{font-size:13px;color:var(--ink-3)}
+.sp-say b,.sp-note b{color:var(--ink);font-weight:600}
+.sp-rec-row{display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+.sp-rec{display:inline-flex;align-items:center;gap:8px;min-height:44px;padding:0 18px;border-radius:var(--r-md);border:1px solid var(--acc);background:var(--acc);color:var(--acc-ink);font-weight:700;font-size:14.5px}
+.sp-rec:disabled{opacity:.75;cursor:progress}
+.sp-rec.on{background:var(--bad);border-color:var(--bad);color:var(--surface);animation:sp-pulse 1.4s ease-in-out infinite}
+@keyframes sp-pulse{0%,100%{box-shadow:0 0 0 0 color-mix(in srgb,var(--bad) 45%,transparent)}50%{box-shadow:0 0 0 7px color-mix(in srgb,var(--bad) 0%,transparent)}}
+@media (prefers-reduced-motion:reduce){.sp-rec.on{animation:none}}
+.sp-status{flex:1;min-width:200px;display:flex;align-items:center;gap:10px;font-size:13px;color:var(--ink-3)}
+.sp-level,.sp-prog{flex:none;width:90px;height:6px;border-radius:3px;background:var(--surface-2);overflow:hidden}
+.sp-prog{width:140px}
+.sp-level i,.sp-prog i{display:block;height:100%;width:0;background:var(--acc);transition:width 90ms linear}
+.sp-setup{border:1px dashed var(--line-2);border-radius:var(--r-md);background:var(--surface-2);padding:12px 14px;font-size:14px;color:var(--ink-2);display:flex;flex-direction:column;gap:10px}
+.sp-setup b{color:var(--ink)}
+.sp-setup-act{display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+.sp-link{border:0;background:none;color:var(--ink-3);text-decoration:underline;font-size:13.5px;padding:4px}
+.sp-result{border-top:1px solid var(--line);padding-top:12px;display:flex;flex-direction:column;gap:12px}
+.sp-sum{display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+.sp-score{display:flex;align-items:baseline;gap:2px;padding:6px 12px;border-radius:var(--r-md);background:var(--ok-soft);color:var(--ok)}
+.sp-score b{font-family:var(--head);font-size:30px;line-height:1;font-weight:700}
+.sp-score span{font-size:13px;font-weight:600;opacity:.8}
+.sp-score.mid{background:var(--flag-soft);color:var(--flag)}
+.sp-score.low{background:var(--bad-soft);color:var(--bad)}
+.sp-sumt{display:flex;flex-direction:column;line-height:1.35}
+.sp-sumt b{font-size:15px;color:var(--ink)}
+.sp-sumt span{font-size:13px;color:var(--ink-3)}
+.sp-cmp{display:flex;gap:8px;margin-left:auto}
+.sp-words{display:flex;flex-wrap:wrap;gap:6px}
+.sp-w{border:1px solid transparent;border-radius:var(--r-sm);padding:3px 9px;font-family:var(--head);font-size:16px;line-height:1.4}
+.sp-w.good{background:var(--ok-soft);color:var(--ok)}
+.sp-w.mid{background:var(--flag-soft);color:var(--flag);font-weight:600}
+.sp-w.low{background:var(--bad-soft);color:var(--bad);font-weight:600}
+.sp-w.fn{background:transparent;color:var(--ink-3);border-color:var(--line)}
+.sp-w.sel{border-color:var(--ink);box-shadow:0 0 0 1px var(--ink)}
+.sp-detail{background:var(--surface-2);border-radius:var(--r-md);padding:12px 14px;display:flex;flex-direction:column;gap:8px}
+.sp-dh{display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 12px}
+.sp-dh>b{font-family:var(--head);font-size:18px}
+.sp-errs{margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:8px}
+.sp-what{font-size:14.5px;color:var(--ink);line-height:1.5}
+.sp-what b{color:var(--bad);font-family:"Segoe UI","Lucida Sans Unicode","Noto Sans",var(--body);font-weight:700}
+.sp-how{font-size:14px;color:var(--ink-2);line-height:1.55;margin-top:2px;padding-left:12px;border-left:2px solid var(--line-2)}
+.sp-fine{font-size:14px;color:var(--ok);font-weight:600}
+.sp-foot{font-size:12px;color:var(--ink-3)}
+
 
 /* ── màn vừa: danh sách bài lên đầu, sơ đồ được cả bề ngang ── */
 @media (max-width:1100px){
@@ -1188,6 +1270,695 @@ window.REVIEW_MAP = {
 
 ;document.head.insertAdjacentHTML('beforeend','<style id="review-css">'+"/* Tab \"Điểm yếu\" (review.js). Dùng lại token màu/chữ của Labs, không định nghĩa màu mới. */\n.rv{display:grid;grid-template-columns:minmax(260px,330px) minmax(0,1fr);gap:24px 48px;align-items:start}\n.rv-side{display:flex;flex-direction:column;gap:14px;min-width:0}\n.rv-main{min-width:0;display:flex;flex-direction:column;gap:18px}\n.rv-kick{font-size:12px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--acc-text)}\n.rv-h1{font-size:30px}\n.rv-lede{color:var(--ink-2);font-size:14.5px;line-height:1.6}\n.rv-k{font-size:12.5px;font-weight:600;color:var(--ink-3)}\n.rv-sr{position:absolute;width:1px;height:1px;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0;padding:0}\n\n/* ô thả file */\n.rv-drop{position:relative;display:flex;gap:14px;align-items:center;padding:18px;border:1.5px dashed var(--line-strong);border-radius:var(--r-lg);background:var(--surface);cursor:pointer;transition:border-color var(--dur) var(--ease),background var(--dur) var(--ease)}\n.rv-drop:hover,.rv-drop.over{border-color:var(--acc);background:var(--acc-soft)}\n.rv-drop:focus-within{outline:2px solid var(--acc);outline-offset:2px}\n.rv-drop svg{width:34px;height:34px;flex:none;color:var(--acc)}\n.rv-drop b{display:block;font-size:15px}\n.rv-drop small{display:block;font-size:12.5px;color:var(--ink-3);line-height:1.45;margin-top:2px}\n.rv-drop.busy{pointer-events:none;opacity:.75}\n.rv-drop.busy svg{animation:rv-pulse 1s ease-in-out infinite alternate}\n@keyframes rv-pulse{to{opacity:.35}}\n.rv-err{padding:10px 12px;border-radius:var(--r-md);background:var(--bad-soft);color:var(--bad);font-size:13.5px}\n.rv .rv-manual-btn{align-self:flex-start;max-width:100%;height:auto;min-height:30px;font-size:13px;padding:0;white-space:normal;text-align:left}\n\n/* bảng điểm đã nộp */\n.rv-reps{list-style:none;margin:6px 0 0;padding:0;border-top:1px solid var(--line)}\n.rv-rep{padding:12px 0;border-bottom:1px solid var(--line)}\n.rv-rep-top{display:flex;align-items:center;gap:8px}\n.rv-rep-top b{font-family:var(--mono);font-size:14px}\n.rv-score{margin-left:auto;font-family:var(--mono);font-weight:600;font-size:15px}\n.rv-score small{font-weight:400;color:var(--ink-3);font-size:12px;margin-left:2px}\n.rv-x{border:0;background:none;width:30px;height:30px;border-radius:var(--r-sm);font-size:19px;line-height:1;color:var(--ink-3)}\n.rv-x:hover{background:var(--surface-2);color:var(--bad)}\n.rv-rep-sum{display:block;border:0;background:none;padding:4px 0 0 16px;font-size:13px;color:var(--ink-3);text-align:left}\n.rv-rep-sum:hover{color:var(--ink)}\n.rv-rows{list-style:none;margin:8px 0 0 16px;padding:0;display:flex;flex-direction:column;gap:6px}\n.rv-rows li{display:flex;gap:10px;align-items:baseline;font-size:13.5px;line-height:1.4}\n.rv-rows em{color:var(--ink-3)}\n.rv-pct{flex:none;display:inline-block;min-width:42px;text-align:center;font-family:var(--mono);font-size:12px;font-weight:600;padding:1px 6px;border-radius:var(--r-pill)}\n.rv-pct.low{background:var(--bad-soft);color:var(--bad)}\n.rv-pct.mid{background:var(--flag-soft);color:var(--flag)}\n.rv-pct.ok{background:var(--ok-soft);color:var(--ok)}\n\n/* nhập tay */\n.rv-man{display:flex;flex-direction:column;gap:10px;padding:14px;border:1px solid var(--line-2);border-radius:var(--r-lg);background:var(--surface)}\n.rv-man .seg{flex-wrap:wrap}\n.rv-note{font-size:13px;color:var(--ink-3)}\n.rv-mrows{list-style:none;margin:0;padding:0;max-height:420px;overflow:auto;border-top:1px solid var(--line)}\n.rv-mrows li{display:flex;gap:10px;align-items:center;justify-content:space-between;padding:8px 0;border-bottom:1px solid var(--line);font-size:13px;line-height:1.4}\n.rv-mrows select{flex:none;font:inherit;font-size:16px;padding:4px 6px;border-radius:var(--r-sm);border:1px solid var(--line-2);background:var(--ground);color:var(--ink)}\n\n/* kế hoạch ôn */\n.rv-plan-head{display:flex;flex-direction:column;gap:8px;padding-bottom:4px}\n.rv-plan-head h2{font-size:28px}\n.rv-meta{font-size:14px;color:var(--ink-2)}\n.rv-meta b{font-family:var(--mono);color:var(--ink)}\n.rv-bar{height:6px;border-radius:var(--r-pill);background:var(--surface-2);overflow:hidden;max-width:420px}\n.rv-bar i{display:block;height:100%;background:var(--ok);border-radius:inherit;transition:width var(--dur) var(--ease)}\n.rv-how{font-size:13.5px;color:var(--ink-3);max-width:70ch}\n\n.rv-list{list-style:none;margin:0;padding:0;border-top:1px solid var(--line-2)}\n.rv-tier{display:flex;align-items:center;gap:10px;padding:18px 0 6px;font-size:12px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-3)}\n.rv-tier::after{content:\"\";flex:1;height:1px;background:var(--line)}\n.rv-tier.t1{color:var(--acc-text)}\n.rv-item{display:grid;grid-template-columns:40px minmax(0,1fr);gap:4px 14px;padding:16px 0 18px;border-bottom:1px solid var(--line)}\n.rv-n{font-family:var(--head);font-size:24px;line-height:1.2;color:var(--ink-3);font-variant-numeric:lining-nums tabular-nums}\n.rv-item.done .rv-n{color:var(--ok)}\n.rv-body{min-width:0;display:flex;flex-direction:column;gap:6px}\n.rv-dom{font-size:12px;color:var(--ink-3);font-family:var(--mono)}\n.rv-body h3{font-size:19.5px}\n.rv-lead{font-size:14px;color:var(--ink-2);line-height:1.55;max-width:72ch}\n.rv-why{display:flex;flex-wrap:wrap;align-items:center;gap:6px;margin-top:2px}\n.rv-why .rv-k{margin-right:2px}\n.rv-chip{display:inline-flex;align-items:center;gap:6px;max-width:100%;padding:3px 10px 3px 3px;border:1px solid var(--line);border-radius:var(--r-pill);background:var(--surface);font-size:12.5px;color:var(--ink-2);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}\n.rv-more{font-size:12.5px;color:var(--ink-3)}\n.rv-acts{display:flex;flex-wrap:wrap;align-items:center;gap:8px 10px;margin-top:6px}\n.rv-prog{font-size:12.5px;color:var(--ink-3)}\n.rv-qtog{margin-left:auto;border:0;background:none;font-size:13px;font-weight:600;color:var(--acc-text);padding:6px 2px}\n.rv-qtog:hover{text-decoration:underline}\n.rv-qs{list-style:none;margin:6px 0 0;padding:0;border-top:1px solid var(--line)}\n.rv-qs button{display:grid;grid-template-columns:22px auto minmax(0,1fr);gap:10px;align-items:baseline;width:100%;padding:9px 6px;border:0;border-bottom:1px solid var(--line);background:none;text-align:left;font-size:13.5px;line-height:1.45;color:var(--ink-2)}\n.rv-qs button:hover{background:var(--surface-2);color:var(--ink)}\n.rv-st{width:18px;height:18px;border-radius:50%;border:1.5px solid var(--line-2);display:inline-grid;place-items:center;font-size:11px;font-weight:700;transform:translateY(3px)}\n.rv-st.ok{border-color:var(--ok);background:var(--ok-soft);color:var(--ok)}\n.rv-st.bad{border-color:var(--bad);background:var(--bad-soft);color:var(--bad)}\n.rv-qn{font-family:var(--mono);font-size:12px;color:var(--ink-3);white-space:nowrap}\n.rv-all{align-self:flex-start}\n\n/* chưa có bảng điểm */\n.rv-empty{padding:28px;border:1px dashed var(--line-strong);border-radius:var(--r-lg);background:var(--ground);display:flex;flex-direction:column;gap:10px}\n.rv-empty h2{font-size:24px}\n.rv-empty p{color:var(--ink-2);max-width:60ch}\n.rv-steps{margin:4px 0 0;padding-left:20px;color:var(--ink-2);display:flex;flex-direction:column;gap:4px}\n\n@media (max-width:900px){\n  .rv{grid-template-columns:minmax(0,1fr)}\n  /* đã có bảng điểm: danh sách bài cần ôn của đề đang mở lên đầu, ô nộp + các bảng điểm xuống dưới (đỡ cuộn) */\n  .rv.has-reps .rv-main{order:-1}\n  .rv.has-reps .rv-side{border-top:1px solid var(--line-2);padding-top:20px}\n}\n@media (max-width:760px){\n  .rv-h1{font-size:25px}\n  .rv-plan-head h2{font-size:23px}\n  .rv-item{grid-template-columns:28px minmax(0,1fr);gap:4px 10px}\n  .rv-n{font-size:20px}\n  .rv-qtog{margin-left:0}\n  .rv-empty{padding:20px}\n}\n"+'</style>');
 </script>
+<script>// Bộ chấm phát âm (không đụng giao diện): nhận xác suất từng âm theo thời gian từ mô hình nhận dạng âm
+// (wav2vec2 espeak, 50 khung/giây) + chuỗi âm chuẩn của từng từ → điểm từng âm / từng từ / cả câu.
+// Hai nguồn bằng chứng, chỉ báo lỗi khi CẢ HAI cùng nói sai (đỡ báo nhầm chỗ đọc đúng):
+//   1) nghe tự do: mô hình tự viết ra chuỗi âm nghe được, so với chuỗi chuẩn (căn chỉnh có trọng số)
+//   2) ép khớp: đặt chuỗi chuẩn lên đoạn ghi âm, xem âm chuẩn có "thắng" ở chỗ của nó không
+// Chạy được cả trong trình duyệt (window.PronCore) lẫn node (module.exports) để tự kiểm.
+(function (g) {
+  "use strict";
+
+  // nhóm âm "gần như nhau" với người nghe — lệch trong nhóm không tính là lỗi
+  var NEAR_GROUPS = [
+    ["t", "d", "ɾ", "ʔ"], ["p", "b"], ["k", "ɡ"], ["s", "z"], ["f", "v"], ["θ", "ð"], ["tʃ", "dʒ"], ["ʃ", "ʒ"],
+    ["ə", "ɐ", "ᵻ", "ɪ", "ʌ", "ɨ"], ["ɚ", "ɜː", "ɜ", "ɹ", "əɹ"], ["ɑː", "ɑ", "ɔ", "ɔː", "a", "ɒ", "aː"],
+    ["uː", "u", "ʊ"], ["iː", "i", "ɪ"], ["oʊ", "o", "oː"], ["eɪ", "e", "eː"], ["ɹ", "r", "ɻ"], ["əl", "l", "ɫ"],
+    ["ɑːɹ", "ɑː"], ["ɔːɹ", "ɔː", "oːɹ"], ["n", "n̩"], ["m", "m̩"],
+    // nói nhanh tự nhiên: nguyên âm yếu đi, cụm cuối rụng bớt — người bản xứ cũng vậy
+    ["ʊ", "ə"], ["ʌ", "ɑː", "ɑ"], ["ə", "ɚ"], ["ɔɪ", "oɪ"], ["ts", "s", "t"], ["dz", "z", "d"]
+  ];
+  var NEAR = {};
+  NEAR_GROUPS.forEach(function (grp) {
+    grp.forEach(function (a) { grp.forEach(function (b) { if (a !== b) NEAR[a + "|" + b] = 1; }); });
+  });
+  function near(a, b) { return a === b || !!NEAR[a + "|" + b]; }
+
+  var RESCUE = +((typeof process !== "undefined" && process.env && process.env.PRON_RESCUE) || 0.5);   // âm chuẩn đạt xác suất ≥ mức này ở chỗ của nó thì coi như đã phát ra
+  var SKIP = { "<pad>": 1, "<s>": 1, "</s>": 1, "<unk>": 1, "|": 1 };
+
+  // chuẩn hoá sóng âm như bộ tiền xử lý của mô hình (trung bình 0, phương sai 1)
+  function normalize(x) {
+    var n = x.length, m = 0, v = 0, i;
+    for (i = 0; i < n; i++) m += x[i];
+    m /= n;
+    for (i = 0; i < n; i++) v += (x[i] - m) * (x[i] - m);
+    var s = Math.sqrt(v / n + 1e-7), out = new Float32Array(n);
+    for (i = 0; i < n; i++) out[i] = (x[i] - m) / s;
+    return out;
+  }
+
+  // logits [T×V] (mảng phẳng) → log-xác suất từng khung
+  function logSoftmax(flat, T, V) {
+    var out = new Float32Array(T * V);
+    for (var t = 0; t < T; t++) {
+      var o = t * V, mx = -Infinity, k, s = 0;
+      for (k = 0; k < V; k++) if (flat[o + k] > mx) mx = flat[o + k];
+      for (k = 0; k < V; k++) s += Math.exp(flat[o + k] - mx);
+      var ls = mx + Math.log(s);
+      for (k = 0; k < V; k++) out[o + k] = flat[o + k] - ls;
+    }
+    return out;
+  }
+
+  // nghe tự do: chọn âm mạnh nhất mỗi khung, gộp lặp, bỏ khoảng trống
+  function greedy(lp, T, V, inv, blank) {
+    var out = [], prev = -1;
+    for (var t = 0; t < T; t++) {
+      var o = t * V, best = 0, bv = -Infinity;
+      for (var k = 0; k < V; k++) if (lp[o + k] > bv) { bv = lp[o + k]; best = k; }
+      if (best !== prev && best !== blank && !SKIP[inv[best]]) out.push({ ph: inv[best], t: t });
+      prev = best;
+    }
+    return out;
+  }
+
+  // căn chuỗi chuẩn E với chuỗi nghe được R (Levenshtein có trọng số) → mỗi âm chuẩn: ok / near / sub / del
+  var VOW = /[aeiouɑɐɒæɔəɘɚɛɜɝɞɤɨɪɯɵøœɶʉʊʌʏᵻy]/;
+  function isVowel(ph) { return VOW.test(ph); }
+  function alignSeq(E, R) {
+    var n = E.length, m = R.length, INS = 0.8, DEL = 1, i, j;
+    var D = [], B = [];
+    for (i = 0; i <= n; i++) { D.push(new Float32Array(m + 1)); B.push(new Uint8Array(m + 1)); }
+    for (i = 1; i <= n; i++) { D[i][0] = i * DEL; B[i][0] = 1; }
+    for (j = 1; j <= m; j++) { D[0][j] = j * INS; B[0][j] = 2; }
+    for (i = 1; i <= n; i++) for (j = 1; j <= m; j++) {
+      var a = E[i - 1], b = R[j - 1].ph;
+      // giọng Mỹ: ɛ trước r thường nghe như eɪ (shared, care)
+      var nr = near(a, b) || (a === "ɛ" && b === "eɪ" && E[i] === "ɹ");
+      var sc = a === b ? 0 : (nr ? 0.2 : 1);
+      var d0 = D[i - 1][j - 1] + sc, d1 = D[i - 1][j] + DEL, d2 = D[i][j - 1] + INS;
+      if (d0 <= d1 && d0 <= d2) { D[i][j] = d0; B[i][j] = 0; }
+      else if (d1 <= d2) { D[i][j] = d1; B[i][j] = 1; }
+      else { D[i][j] = d2; B[i][j] = 2; }
+    }
+    var res = new Array(n);
+    i = n; j = m;
+    while (i > 0 || j > 0) {
+      var op = B[i][j];
+      if (i > 0 && j > 0 && op === 0) {
+        var a2 = E[i - 1], b2 = R[j - 1].ph;
+        var nr2 = near(a2, b2) || (a2 === "ɛ" && b2 === "eɪ" && E[i] === "ɹ");
+        res[i - 1] = { st: a2 === b2 ? "ok" : (nr2 ? "near" : "sub"), heard: b2 };
+        i--; j--;
+      } else if (i > 0 && (j === 0 || op === 1)) { res[i - 1] = { st: "del" }; i--; }
+      else j--;
+    }
+    return res;
+  }
+
+  // ép khớp (CTC Viterbi): đặt chuỗi âm chuẩn lên các khung → khung nào thuộc âm nào
+  function forceAlign(lp, T, V, ids, blank) {
+    var S = ids.length * 2 + 1, NEG = -1e30, t, s;
+    var lab = new Int32Array(S);
+    for (s = 0; s < S; s++) lab[s] = s % 2 ? ids[(s - 1) / 2] : blank;
+    var prev = new Float64Array(S).fill(NEG), cur = new Float64Array(S);
+    var bp = new Int8Array(T * S);
+    prev[0] = lp[lab[0]];
+    if (S > 1) prev[1] = lp[lab[1]];
+    for (t = 1; t < T; t++) {
+      var o = t * V;
+      for (s = 0; s < S; s++) {
+        var best = prev[s], from = 0;
+        if (s > 0 && prev[s - 1] > best) { best = prev[s - 1]; from = 1; }
+        if (s > 1 && lab[s] !== blank && lab[s] !== lab[s - 2] && prev[s - 2] > best) { best = prev[s - 2]; from = 2; }
+        cur[s] = best + lp[o + lab[s]];
+        bp[t * S + s] = from;
+      }
+      var tmp = prev; prev = cur; cur = tmp;
+    }
+    s = S > 1 && prev[S - 2] > prev[S - 1] ? S - 2 : S - 1;
+    var path = new Int32Array(T);
+    for (t = T - 1; t >= 0; t--) { path[t] = s; if (t > 0) s -= bp[t * S + s]; }
+    // khung của từng âm chuẩn
+    var spans = ids.map(function () { return []; });
+    for (t = 0; t < T; t++) if (path[t] % 2) spans[(path[t] - 1) / 2].push(t);
+    return spans;
+  }
+
+  // độ tin âm chuẩn: xác suất cao nhất mà âm chuẩn đạt được trong đoạn khung của nó (0..1)
+  function confidence(lp, V, span, id) {
+    var best = 0;
+    span.forEach(function (t) { var p = Math.exp(lp[t * V + id]); if (p > best) best = p; });
+    return { c: best };
+  }
+
+  /**
+   * Chấm 1 lần đọc.
+   * logits: Float32Array phẳng [T×V]; vocab: {âm: id}; words: [{d, p:[[âm, nhấn]]}]
+   * → {score, words:[{d, score, ph:[{ph, st:"ok|near|err", heard, kind:"sub|del"}]}], heard}
+   */
+  function score(logits, T, V, vocab, words) {
+    var inv = [];
+    Object.keys(vocab).forEach(function (k) { inv[vocab[k]] = k; });
+    var blank = vocab["<pad>"];
+    var lp = logSoftmax(logits, T, V);
+    var E = [], ids = [], owner = [], soft = [];
+    words.forEach(function (w, wi) {
+      w.p.forEach(function (p) {
+        if (vocab[p[0]] === undefined) return;
+        E.push(p[0]); ids.push(vocab[p[0]]); owner.push(wi);
+        // nguyên âm KHÔNG nhấn ở từ nhiều âm tiết: người bản xứ cũng đọc lướt → lệch không tính lỗi
+        soft.push(isVowel(p[0]) && !p[1] && w.p.filter(function (q) { return isVowel(q[0]); }).length > 1);
+      });
+    });
+    var R = greedy(lp, T, V, inv, blank);
+    var al = alignSeq(E, R);
+    var spans = T >= ids.length ? forceAlign(lp, T, V, ids, blank) : ids.map(function () { return []; });
+    var outW = words.map(function (w) { return { d: w.d, ph: [], score: 0 }; });
+    E.forEach(function (ph, i) {
+      var a = al[i], cf = confidence(lp, V, spans[i], ids[i]), st;
+      if (a.st === "ok") st = "ok";
+      else if (a.st === "near") st = "near";
+      else st = cf.c >= RESCUE || words[owner[i]].f || soft[i] ? "near" : "err";   // ép khớp vẫn nghe ra âm chuẩn, hoặc từ chức năng → không báo lỗi
+      var r = { ph: ph, st: st, c: +cf.c.toFixed(2) };
+      if (st === "err") { r.kind = a.st; r.heard = a.st === "sub" ? a.heard : ""; }
+      outW[owner[i]].ph.push(r);
+    });
+    var tot = 0, cnt = 0;
+    outW.forEach(function (w) {
+      var s = 0;
+      w.ph.forEach(function (p) { s += p.st === "ok" ? 1 : p.st === "near" ? 0.85 : 0; });
+      w.score = w.ph.length ? Math.round(100 * s / w.ph.length) : 0;
+      w.err = w.ph.some(function (p) { return p.st === "err"; });
+      tot += s; cnt += w.ph.length;
+    });
+    return { score: cnt ? Math.round(100 * tot / cnt) : 0, words: outW, heard: R.map(function (r) { return r.ph; }).join(" ") };
+  }
+
+  var API = { normalize: normalize, score: score, near: near };
+  if (typeof module !== "undefined" && module.exports) module.exports = API; else g.PronCore = API;
+})(this);
+
+// Luyện phát âm trên thẻ Flashcard: nghe mẫu (thường/chậm), phiên âm + âm nhấn, ghi âm → chấm từng âm (PronCore),
+// chỉ âm sai + mẹo sửa tiếng Việt, nghe lại giọng mình cạnh giọng mẫu.
+// Dữ liệu: pron.json (phiên âm từng thẻ + bảng âm của mô hình) + audio/<id>-*.mp3, tải khi mở Flashcard.
+// Bộ chấm: mô hình nhận dạng âm (~242 MB) tải từ HuggingFace khi người học bấm lần đầu, lưu trong Cache Storage.
+(function () {
+  "use strict";
+  var ORT_VER = "1.30.0";
+  var ORT_BASE = "https://cdn.jsdelivr.net/npm/onnxruntime-web@" + ORT_VER + "/dist/";
+  var MODEL_URL = "https://huggingface.co/onnx-community/wav2vec2-lv-60-espeak-cv-ft-ONNX/resolve/main/onnx/model_q4.onnx";
+  var MODEL_MB = 242, CACHE = "learn-pron-model-v1", HIST = "learn-pron-v1";
+
+  var P = null, pLoading = null;             // {v: bảng âm, c: {khoá từ: phiên âm}}
+  var M = { sess: null, cached: null, loading: null, prog: 0 };
+  var S = { key: null };                      // trạng thái khung luyện nói của thẻ đang hiện
+  var player = null, en = false, cur = null;
+
+  function esc(s) { return String(s).replace(/[&<>"]/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]; }); }
+  function T(vi, e) { return en ? e : vi; }
+
+  // ── dữ liệu phát âm ──
+  function loadPron() {
+    if (P || pLoading) return pLoading;
+    pLoading = fetch("pron.json").then(function (r) { if (!r.ok) throw 0; return r.json(); })
+      .then(function (j) { P = j; }).catch(function () { P = { v: null, c: {} }; });
+    return pLoading;
+  }
+  function recOf(it) { return P && P.c ? P.c[it.lk] : null; }
+  function modeOf(it) { return it.kind === "sentence" ? "s" : "w"; }
+
+  // ── nghe mẫu ──
+  function stopAudio() {
+    if (player) { player.pause(); player = null; }
+    if (window.speechSynthesis) speechSynthesis.cancel();
+  }
+  function speakTTS(text, rate) {
+    if (!window.speechSynthesis) return;
+    var u = new SpeechSynthesisUtterance(text);
+    u.lang = "en-US"; u.rate = rate || 1;
+    var v = speechSynthesis.getVoices().filter(function (x) { return /^en[-_]US/i.test(x.lang); });
+    if (v.length) u.voice = v.filter(function (x) { return /google|natural|aria|jenny/i.test(x.name); })[0] || v[0];
+    speechSynthesis.speak(u);
+  }
+  // file mẫu Kokoro; không có file (thẻ chưa làm dữ liệu) thì dùng giọng máy của trình duyệt
+  function playSample(it, slow, chunk) {
+    stopAudio();
+    var r = recOf(it), m = modeOf(it), text;
+    if (chunk != null) text = it.fc && it.fc.c[chunk] ? it.fc.c[chunk][0] : "";
+    else text = r ? r[m].say : (m === "s" ? it.fc.s : it.front);
+    if (r) {
+      var f = chunk != null ? "-c" + chunk : (m === "w" ? (slow ? "-ws" : "-w") : "-s");
+      player = new Audio("audio/" + r.id + f + ".mp3");
+      if (slow && m === "s" && chunk == null) player.playbackRate = 0.8;
+      player.play().catch(function () { speakTTS(text, slow ? 0.75 : 1); });
+    } else speakTTS(text, slow ? 0.75 : 1);
+  }
+  function playMine() {
+    if (!S.audio) return;
+    stopAudio();
+    var ac = new (window.AudioContext || window.webkitAudioContext)();
+    var buf = ac.createBuffer(1, S.audio.length, 16000);
+    buf.copyToChannel(S.audio, 0);
+    var src = ac.createBufferSource(); src.buffer = buf; src.connect(ac.destination);
+    src.onended = function () { ac.close(); };
+    src.start();
+  }
+
+  // ── bộ chấm: thư viện chạy mô hình + mô hình (tải 1 lần, lưu máy) ──
+  function checkCached() {
+    if (M.cached !== null || !window.caches) { if (!window.caches) M.cached = false; return Promise.resolve(M.cached); }
+    return caches.open(CACHE).then(function (c) { return c.match(MODEL_URL); })
+      .then(function (h) { M.cached = !!h; return M.cached; }).catch(function () { M.cached = false; return false; });
+  }
+  function loadScript(src) {
+    return new Promise(function (ok, bad) {
+      if (window.ort) return ok();
+      var s = document.createElement("script"); s.src = src; s.onload = ok; s.onerror = bad; document.head.appendChild(s);
+    });
+  }
+  function fetchModel(onProg) {
+    var cache;
+    return (window.caches ? caches.open(CACHE) : Promise.resolve(null)).then(function (c) {
+      cache = c; return c ? c.match(MODEL_URL) : null;
+    }).then(function (hit) {
+      if (hit) return hit.arrayBuffer();
+      return fetch(MODEL_URL).then(function (r) {
+        if (!r.ok) throw new Error("http " + r.status);
+        var total = +r.headers.get("content-length") || MODEL_MB * 1048576, got = 0, parts = [];
+        var rd = r.body.getReader();
+        function pump() {
+          return rd.read().then(function (x) {
+            if (x.done) return;
+            parts.push(x.value); got += x.value.length; onProg(Math.min(0.99, got / total)); return pump();
+          });
+        }
+        return pump().then(function () {
+          var blob = new Blob(parts);
+          var save = cache ? cache.put(MODEL_URL, new Response(blob)).catch(function () {}) : Promise.resolve();
+          return save.then(function () { M.cached = true; return blob.arrayBuffer(); });
+        });
+      });
+    });
+  }
+  function ensureModel() {
+    if (M.sess) return Promise.resolve(M.sess);
+    if (M.loading) return M.loading;
+    M.prog = 0;
+    M.loading = loadScript(ORT_BASE + "ort.wasm.min.js").then(function () {
+      ort.env.wasm.wasmPaths = ORT_BASE;
+      ort.env.wasm.numThreads = self.crossOriginIsolated ? Math.min(4, navigator.hardwareConcurrency || 2) : 1;
+      return fetchModel(function (p) { M.prog = p; paintProgress(); });
+    }).then(function (buf) {
+      M.prog = 1; paintProgress();
+      return ort.InferenceSession.create(new Uint8Array(buf), { executionProviders: ["wasm"] });
+    }).then(function (s) { M.sess = s; M.loading = null; return s; })
+      .catch(function (e) { M.loading = null; throw e; });
+    return M.loading;
+  }
+
+  // ── ghi âm: tự dừng khi người đọc ngừng nói ──
+  var R = null;
+  function startRec() {
+    if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) return Promise.reject(new Error("nomic"));
+    return navigator.mediaDevices.getUserMedia({ audio: { channelCount: 1, echoCancellation: true, noiseSuppression: true, autoGainControl: true } })
+      .then(function (stream) {
+        var ac = new (window.AudioContext || window.webkitAudioContext)();
+        var src = ac.createMediaStreamSource(stream);
+        var proc = ac.createScriptProcessor(4096, 1, 1);
+        var sent = modeOf(cur) === "s";
+        R = { stream: stream, ac: ac, src: src, proc: proc, bufs: [], t0: Date.now(), noise: 0, nN: 0, spoke: false, quiet: 0,
+          maxMs: sent ? 20000 : 8000, tailMs: sent ? 1700 : 1300 };
+        proc.onaudioprocess = function (e) {
+          if (!R) return;
+          var d = e.inputBuffer.getChannelData(0), s = 0;
+          for (var i = 0; i < d.length; i++) s += d[i] * d[i];
+          var rms = Math.sqrt(s / d.length), dt = d.length / ac.sampleRate * 1000;
+          R.bufs.push(new Float32Array(d));
+          if (Date.now() - R.t0 < 300) { R.noise += rms; R.nN++; }
+          var thr = Math.max(0.015, (R.nN ? R.noise / R.nN : 0) * 3);
+          if (rms > thr) { R.spoke = true; R.quiet = 0; } else if (R.spoke) R.quiet += dt;
+          paintLevel(Math.min(1, rms / 0.15));
+          if ((R.spoke && R.quiet > R.tailMs) || Date.now() - R.t0 > R.maxMs) stopRec();
+        };
+        src.connect(proc); proc.connect(ac.destination);
+      });
+  }
+  function stopRec() {
+    if (!R) return;
+    var r = R; R = null;
+    try { r.proc.disconnect(); r.src.disconnect(); } catch (e) {}
+    r.stream.getTracks().forEach(function (t) { t.stop(); });
+    var n = 0; r.bufs.forEach(function (b) { n += b.length; });
+    var all = new Float32Array(n), o = 0;
+    r.bufs.forEach(function (b) { all.set(b, o); o += b.length; });
+    var rate = r.ac.sampleRate;
+    r.ac.close();
+    S.state = "busy"; paint();
+    resample16k(all, rate).then(function (x) {
+      x = trimSilence(x);
+      if (!x) { S.state = "idle"; S.msg = T("Mình chưa nghe thấy tiếng. Kiểm tra micro rồi đọc to hơn một chút.", "No voice heard. Check your microphone and speak a little louder."); paint(); return; }
+      S.audio = x;
+      return analyze(x);
+    }).catch(function () { S.state = "idle"; S.msg = T("Chấm chưa được lần này. Bấm đọc lại thử.", "Scoring failed this time. Try recording again."); paint(); });
+  }
+  function resample16k(x, rate) {
+    if (rate === 16000) return Promise.resolve(x);
+    var len = Math.ceil(x.length * 16000 / rate);
+    var oc = new OfflineAudioContext(1, len, 16000);
+    var b = oc.createBuffer(1, x.length, rate); b.copyToChannel(x, 0);
+    var s = oc.createBufferSource(); s.buffer = b; s.connect(oc.destination); s.start();
+    return oc.startRendering().then(function (out) { return out.getChannelData(0).slice(); });
+  }
+  // cắt lặng đầu/cuối (giữ đệm 0,25 giây); không có tiếng nói → null
+  function trimSilence(x) {
+    var W = 320, n = Math.floor(x.length / W), e = [], mx = 0, i, j;
+    for (i = 0; i < n; i++) { var s = 0; for (j = 0; j < W; j++) s += x[i * W + j] * x[i * W + j]; e.push(Math.sqrt(s / W)); if (e[i] > mx) mx = e[i]; }
+    if (mx < 0.01) return null;
+    var thr = Math.max(0.008, mx * 0.08), a = 0, b = n - 1;
+    while (a < n && e[a] < thr) a++;
+    while (b > a && e[b] < thr) b--;
+    var pad = 4000;
+    return x.slice(Math.max(0, a * W - pad), Math.min(x.length, (b + 1) * W + pad));
+  }
+  function analyze(x) {
+    var rec = recOf(cur), m = modeOf(cur);
+    return ensureModel().then(function (sess) {
+      var inp = PronCore.normalize(x);
+      return sess.run({ input_values: new ort.Tensor("float32", inp, [1, inp.length]) });
+    }).then(function (out) {
+      var lg = out[Object.keys(out)[0]];
+      var res = PronCore.score(lg.data, lg.dims[1], lg.dims[2], P.v, rec[m].t);
+      S.res = res; S.state = "done";
+      var firstErr = -1;
+      res.words.forEach(function (w, i) { if (firstErr < 0 && w.err && !rec[m].t[i].f) firstErr = i; });
+      S.sel = firstErr >= 0 ? firstErr : null;
+      saveHist(res);
+      paint();
+    });
+  }
+  function saveHist(res) {
+    try {
+      var h = JSON.parse(localStorage.getItem(HIST) || "[]");
+      var errs = [];
+      res.words.forEach(function (w) { w.ph.forEach(function (p) { if (p.st === "err") errs.push(p.ph); }); });
+      h.push({ k: cur.lk, m: modeOf(cur), s: res.score, e: errs, t: Date.now() });
+      if (h.length > 600) h = h.slice(-600);
+      localStorage.setItem(HIST, JSON.stringify(h));
+    } catch (e) {}
+    // số trên nút lọc "Cần luyện nói lại" (không vẽ lại cả màn để thẻ đang xem không bị đổi)
+    var sb = document.querySelector("#fc-spk b"); if (sb) sb.textContent = PronUI.weakCount();
+  }
+  // ── lịch sử: điểm lần gần nhất của từng thẻ, và các âm hay sai ──
+  var WEAK_BELOW = 75, histOpen = false;
+  function readHist() { try { return JSON.parse(localStorage.getItem(HIST) || "[]"); } catch (e) { return []; } }
+  function lastScores() { var m = {}; readHist().forEach(function (x) { m[x.k] = x.s; }); return m; }
+  function topErrs(h) {
+    // đếm theo số LẦN đọc có sai âm đó (1 lần sai 2 chỗ cùng âm vẫn tính 1), trong 200 lần gần nhất
+    var c = {};
+    h.slice(-200).forEach(function (x) {
+      var seen = {};
+      (x.e || []).forEach(function (ph) { ph = clean(ph); if (!ph || seen[ph]) return; seen[ph] = 1; c[ph] = (c[ph] || 0) + 1; });
+    });
+    return Object.keys(c).map(function (k) { return [k, c[k]]; }).filter(function (x) { return x[1] >= 2; })
+      .sort(function (a, b) { return b[1] - a[1]; }).slice(0, 5);
+  }
+
+  // ── mẹo sửa âm (cho người Việt) ──
+  var TIP = {
+    "θ": ["think", "Đặt đầu lưỡi giữa hai hàm răng, thổi hơi nhẹ qua khe. Không chặn hơi như chữ \"t\", không đọc thành \"th\" hay \"s\" tiếng Việt.", "Put your tongue tip between your teeth and blow air gently. Don't stop the air like /t/ or hiss like /s/."],
+    "ð": ["this", "Lưỡi giữa hai răng như /θ/ nhưng rung cổ họng. Không đọc thành \"d\" hay \"z\".", "Tongue between the teeth like /θ/, but voiced. Not /d/ or /z/."],
+    "ʃ": ["she", "Chu môi ra trước, lưỡi lùi sau một chút, hơi \"sh\" dày. Không dẹt miệng như \"s\".", "Round your lips forward and pull the tongue back a little. A thick \"sh\", not a thin /s/."],
+    "s": ["see", "Miệng dẹt, đầu lưỡi gần lợi răng trên, hơi \"xì\" mảnh và rõ. Không chu môi như \"sh\".", "Flat lips, tongue tip near the ridge behind the top teeth, a thin clear hiss."],
+    "z": ["zoo", "Như /s/ nhưng rung cổ họng, nghe \"zzz\" như tiếng ong.", "Like /s/ but voiced: a buzzing \"zzz\"."],
+    "ʒ": ["vision", "Như /ʃ/ nhưng rung cổ họng.", "Like /ʃ/ but voiced."],
+    "tʃ": ["chair", "Chạm lưỡi vào lợi răng rồi bật ra thành \"ch\" có chu môi, mạnh hơn \"ch\" tiếng Việt.", "Stop the air with the tongue, then release into \"sh\" with rounded lips."],
+    "dʒ": ["job", "Như /tʃ/ nhưng rung cổ họng. Không đọc thành \"d\" hay \"z\".", "Like /tʃ/ but voiced. Not /d/ or /z/."],
+    "ɹ": ["red", "Cong lưỡi lùi vào trong, KHÔNG chạm vòm miệng, môi hơi tròn. Không rung như \"r\" tiếng Việt, không đọc thành \"l\" hay \"z\".", "Curl the tongue back without touching the roof of the mouth; lips slightly rounded. Not /l/."],
+    "l": ["let", "Đầu lưỡi chạm lợi răng trên. Ở cuối từ (tool, feel) giữ lưỡi chạm lâu hơn, đừng bỏ âm.", "Tongue tip on the ridge behind the top teeth. At the end of a word, hold it; don't drop it."],
+    "ŋ": ["sing", "Cuống lưỡi chạm vòm mềm như \"ng\" tiếng Việt. Không đọc thành \"n\".", "Back of the tongue against the soft palate, like \"ng\". Not /n/."],
+    "n": ["no", "Đầu lưỡi chạm lợi răng trên. Không đọc thành \"ng\".", "Tongue tip on the ridge behind the top teeth. Not \"ng\"."],
+    "m": ["me", "Mím hai môi, hơi ra đằng mũi.", "Close the lips; air through the nose."],
+    "t": ["top", "Đầu lưỡi chạm lợi răng trên rồi bật hơi. Ở cuối từ vẫn phải nghe được /t/ nhẹ.", "Tongue tip on the ridge, then release. Keep a light /t/ at the end of words."],
+    "d": ["day", "Như /t/ nhưng rung cổ họng. Ở cuối từ vẫn phải nghe được.", "Like /t/ but voiced. Keep it audible at the end of words."],
+    "k": ["key", "Cuống lưỡi chặn hơi rồi bật ra. Ở cuối từ vẫn bật nhẹ.", "Back of the tongue stops the air, then release."],
+    "ɡ": ["go", "Như /k/ nhưng rung cổ họng.", "Like /k/ but voiced."],
+    "p": ["pen", "Mím môi rồi bật hơi. Ở cuối từ (stop, prompt) vẫn phải bật nhẹ.", "Close the lips, then release with a puff of air."],
+    "b": ["bed", "Như /p/ nhưng rung cổ họng.", "Like /p/ but voiced."],
+    "f": ["fan", "Răng trên chạm môi dưới, thổi hơi.", "Top teeth on the lower lip, blow air."],
+    "v": ["van", "Răng trên chạm môi dưới, rung cổ họng. Không đọc thành \"b\" hay \"d\".", "Top teeth on the lower lip, voiced. Not /b/."],
+    "h": ["hat", "Hơi thở nhẹ từ cổ họng.", "A light breath from the throat."],
+    "w": ["we", "Tròn môi rồi mở nhanh.", "Round the lips, then open quickly."],
+    "j": ["yes", "Như \"d\" miền Nam trong \"da\".", "Like the y in \"yes\"."],
+    "iː": ["see", "\"i\" dài, căng môi như đang cười.", "A long, tense \"ee\" with spread lips."],
+    "ɪ": ["sit", "\"i\" ngắn và lỏng, hơi ngả sang \"ê\".", "A short, relaxed \"i\"."],
+    "i": ["happy", "\"i\" ngắn ở cuối từ.", "A short \"ee\" at the end of a word."],
+    "eɪ": ["day", "Nguyên âm đôi: bắt đầu từ \"ê\" rồi trượt sang \"i\". Không đọc phẳng thành một âm \"e\".", "A glide: start at \"e\" and move to \"i\". Don't flatten it."],
+    "ɛ": ["bed", "\"e\" ngắn, miệng mở vừa.", "A short \"e\", mouth half open."],
+    "æ": ["cat", "Mở miệng rộng, hạ hàm, âm nằm giữa \"e\" và \"a\".", "Open wide and drop the jaw: between \"e\" and \"a\"."],
+    "ɑː": ["father", "\"a\" mở rộng, lưỡi thấp và lùi về sau.", "An open \"ah\" with the tongue low and back."],
+    "ɔː": ["law", "\"o\" mở, môi tròn, giữ một âm. Không trượt sang \"u\" hay thành \"ao\".", "An open, rounded \"aw\". One sound, no glide."],
+    "ɔ": ["law", "\"o\" mở, môi tròn.", "An open, rounded \"aw\"."],
+    "oʊ": ["go", "Nguyên âm đôi: \"ô\" trượt sang \"u\".", "A glide from \"o\" to \"u\"."],
+    "ʊ": ["put", "\"u\" ngắn, môi hơi tròn, lỏng.", "A short, relaxed \"u\"."],
+    "uː": ["too", "\"u\" dài, môi tròn chu ra.", "A long \"oo\" with rounded lips."],
+    "ʌ": ["cup", "\"ă\" ngắn, miệng thả lỏng.", "A short, relaxed \"uh\"."],
+    "ə": ["about", "\"ơ\" rất nhẹ, lướt nhanh.", "A very light, quick \"uh\"."],
+    "ɚ": ["butter", "\"ơ\" có cong lưỡi kiểu /r/.", "\"er\" with the tongue curled back."],
+    "ɜː": ["bird", "\"ơ\" dài, cong lưỡi kiểu /r/.", "A long \"er\" with the tongue curled back."],
+    "aɪ": ["my", "Nguyên âm đôi: \"a\" trượt sang \"i\".", "A glide from \"a\" to \"i\"."],
+    "aʊ": ["now", "Nguyên âm đôi: \"a\" trượt sang \"u\".", "A glide from \"a\" to \"u\"."],
+    "ɔɪ": ["boy", "\"o\" trượt sang \"i\".", "A glide from \"o\" to \"i\"."]
+  };
+  TIP["ᵻ"] = TIP["ɪ"]; TIP["ɐ"] = TIP["ə"]; TIP["ɾ"] = TIP["t"]; TIP["əl"] = TIP["l"]; TIP["ts"] = TIP["s"];
+  var VOW = /[aeiouɑɐɒæɔəɚɛɜɪʊʌᵻ]/;
+  function clean(ph) { return String(ph || "").replace(/[.^]/g, ""); }
+
+  function errLines(w, tok) {
+    var out = [], seen = {};
+    var ph = w.ph, lastCons = -1;
+    for (var i = ph.length - 1; i >= 0; i--) if (!VOW.test(ph[i].ph)) { lastCons = i; break; }
+    ph.forEach(function (p, i) {
+      if (p.st !== "err" || seen[p.ph + p.kind + p.heard]) return;
+      seen[p.ph + p.kind + p.heard] = 1;
+      var t = TIP[p.ph], ex = t ? T(" (như trong <i>" + t[0] + "</i>)", " (as in <i>" + t[0] + "</i>)") : "";
+      var head;
+      if (p.kind === "del" && i >= lastCons && !VOW.test(p.ph) && i >= ph.length - 2)
+        head = T("Âm cuối <b>/" + esc(p.ph) + "/</b>" + ex + " bị nuốt mất. Tiếng Việt không bật âm cuối nên người Việt hay bỏ; tiếng Anh cần nghe thấy âm này (nhất là -t, -d, -s, -z vì chúng mang nghĩa quá khứ, số nhiều).",
+          "The final <b>/" + esc(p.ph) + "/</b>" + ex + " is missing. English needs final consonants to be heard.");
+      else if (p.kind === "del")
+        head = T("Thiếu âm <b>/" + esc(p.ph) + "/</b>" + ex + ".", "The sound <b>/" + esc(p.ph) + "/</b>" + ex + " is missing.");
+      else
+        head = T("Âm <b>/" + esc(p.ph) + "/</b>" + ex + ": máy nghe thành <b>/" + esc(clean(p.heard)) + "/</b>.",
+          "<b>/" + esc(p.ph) + "/</b>" + ex + " sounded like <b>/" + esc(clean(p.heard)) + "/</b>.");
+      out.push('<li><p class="sp-what">' + head + '</p>' + (t ? '<p class="sp-how">' + esc(en ? t[2] : t[1]) + "</p>" : "") + "</li>");
+    });
+    return out.join("");
+  }
+  // phiên âm có dấu nhấn, âm sai tô đỏ
+  function ipaHtml(tok, w) {
+    // cụm nhiều từ (vd "Claude dot M D"): chèn khoảng trắng đúng chỗ ngắt từ của tok.i
+    var ends = {}, lens = (tok.i || "").split(" ").map(function (x) { return x.replace(/[ˈˌ]/g, "").length; });
+    if (lens.length > 1) {
+      var acc = 0, k = 0, n = 0;
+      tok.p.forEach(function (p, i) { acc += p[0].length; n += p[0].length; if (k < lens.length - 1 && n === lens[k]) { ends[i] = 1; k++; n = 0; } });
+      if (acc !== lens.reduce(function (a, b) { return a + b; }, 0)) ends = {};
+    }
+    return "/" + tok.p.map(function (p, i) {
+      var mark = p[1] === 1 ? "ˈ" : p[1] === 2 ? "ˌ" : "";
+      var bad = w && w.ph[i] && w.ph[i].st === "err";
+      return (VOW.test(p[0]) ? mark : "") + (bad ? '<span class="bad">' + esc(p[0]) + "</span>" : esc(p[0])) + (ends[i] ? " " : "");
+    }).join("") + "/";
+  }
+  // đặt dấu nhấn trước phụ âm đầu âm tiết: chỉ để đọc, không ảnh hưởng chấm
+  function ipaPlain(tok) { return tok.i ? "/" + tok.i + "/" : ipaHtml(tok); }
+  function sylHtml(sy) {
+    return esc(sy).replace(/(^|·)([A-Z]+)(?=·|$)/g, function (_, a, b) { return a + "<b>" + b.toLowerCase() + "</b>"; });
+  }
+
+  // ── vẽ khung ──
+  var IC = {
+    play: '<svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path d="M8 5.5v13l10.5-6.5z" fill="currentColor"/></svg>',
+    slow: '<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="13" r="8"/><path d="M12 9v4l2.5 2M9.5 2.5h5"/></svg>',
+    mic: '<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5.5 11a6.5 6.5 0 0 0 13 0M12 17.5V21"/></svg>',
+    stop: '<svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><rect x="6.5" y="6.5" width="11" height="11" rx="2" fill="currentColor"/></svg>',
+    me: '<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="8" r="3.5"/><path d="M5 20c1.2-3.6 4-5.5 7-5.5s5.8 1.9 7 5.5"/></svg>'
+  };
+  function band(s) {
+    if (s >= 90) return ["good", T("Rất tốt", "Excellent")];
+    if (s >= 75) return ["ok", T("Khá", "Good")];
+    if (s >= 60) return ["mid", T("Tạm được", "Fair")];
+    return ["low", T("Cần luyện thêm", "Keep practising")];
+  }
+
+  function pronLine(it, rec) {
+    var m = modeOf(it);
+    if (!rec) return '<div class="sp-pron"><span class="sp-note">' + T("Giọng máy của trình duyệt · thẻ này chưa có phiên âm", "Browser voice · no transcription for this card yet") + "</span></div>";
+    if (m === "w") {
+      var toks = rec.w.t;
+      var ipa = toks.map(function (t) { return ipaPlain(t); }).join(" ");
+      var say = toks.length === 1 && toks[0].say ? '<span class="sp-say">' + T("đọc là", "say") + " <b>" + esc(toks[0].say) + "</b></span>" : "";
+      var syl = toks.map(function (t) { return t.sy ? sylHtml(t.sy) : ""; }).filter(Boolean).join(" ");
+      return '<div class="sp-pron"><span class="sp-ipa">' + esc(ipa) + "</span>" + (syl ? '<span class="sp-syl" title="' + T("chữ đậm = âm nhấn", "bold = stressed") + '">' + syl + "</span>" : "") + say + "</div>";
+    }
+    var main = rec.w.t.map(function (t) { return ipaPlain(t); }).join(" ");
+    return '<div class="sp-pron"><span class="sp-note">' + T("Từ chính", "Key term") + ' <b>' + esc(it.term) + "</b></span><span class=\"sp-ipa\">" + esc(main) + "</span></div>";
+  }
+
+  function recRow(it, rec) {
+    if (!rec || !P.v) return "";
+    var sent = modeOf(it) === "s";
+    var st = S.state, btn, status;
+    if (st === "rec") {
+      btn = '<button class="sp-rec on" id="sp-rec" data-act="stop">' + IC.stop + T("Dừng", "Stop") + "</button>";
+      status = '<div class="sp-level" aria-hidden="true"><i id="sp-lv"></i></div><span>' + T("Đang nghe… đọc xong máy tự dừng", "Listening… stops when you finish") + "</span>";
+    } else if (st === "busy" || st === "dl") {
+      btn = '<button class="sp-rec" id="sp-rec" disabled>' + IC.mic + T("Đang chấm…", "Scoring…") + "</button>";
+      status = st === "dl" ? '<div class="sp-prog"><i id="sp-pg" style="width:' + Math.round(M.prog * 100) + '%"></i></div><span id="sp-pgt">' + progText() + "</span>"
+        : "<span>" + T("Đang so từng âm với giọng chuẩn…", "Comparing each sound with the model voice…") + "</span>";
+    } else {
+      btn = '<button class="sp-rec" id="sp-rec" data-act="rec">' + IC.mic + (S.res ? T("Đọc lại", "Try again") : T("Đọc to để chấm", "Read aloud to score")) + "</button>";
+      status = "<span>" + (S.msg ? esc(S.msg) : sent ? T("Bấm rồi đọc to cả câu. Máy tự dừng khi bạn ngừng nói.", "Press, then read the whole sentence aloud. It stops when you finish.")
+        : T("Bấm rồi đọc to từ này. Máy tự dừng khi bạn ngừng nói.", "Press, then say the term aloud. It stops when you finish.")) + "</span>";
+    }
+    return '<div class="sp-rec-row">' + btn + '<div class="sp-status">' + status + "</div></div>";
+  }
+  function progText() {
+    return M.prog >= 1 ? T("Đang khởi động bộ chấm…", "Starting the scorer…")
+      : T("Đang tải bộ chấm phát âm: ", "Downloading the pronunciation scorer: ") + Math.round(M.prog * MODEL_MB) + " / " + MODEL_MB + " MB";
+  }
+
+  function setupBox() {
+    return '<div class="sp-setup"><p><b>' + T("Lần đầu cần tải bộ chấm phát âm (" + MODEL_MB + " MB).", "First time: download the pronunciation scorer (" + MODEL_MB + " MB).") + "</b> "
+      + T("Chỉ tải một lần, lưu trên máy này, chạy ngay trong trình duyệt. Giọng bạn không gửi đi đâu.", "Downloaded once and kept on this computer. It runs in your browser; your voice is not uploaded.") + "</p>"
+      + '<div class="sp-setup-act"><button class="btn primary" data-act="dl">' + T("Tải và bật chấm điểm", "Download and turn on") + '</button><button class="sp-link" data-act="later">' + T("Để sau", "Later") + "</button></div></div>";
+  }
+
+  function resultBox(it, rec) {
+    var res = S.res, m = modeOf(it), toks = rec[m].t, b = band(res.score);
+    var chips = res.words.map(function (w, i) {
+      var tok = toks[i], cls = tok.f ? "fn" : !w.err ? "good" : w.score >= 60 ? "mid" : "low";
+      return '<button class="sp-w ' + cls + (S.sel === i ? " sel" : "") + '" data-w="' + i + '">' + esc(tok.d) + "</button>";
+    }).join("");
+    var detail = "";
+    if (S.sel != null && res.words[S.sel]) {
+      var w = res.words[S.sel], tok = toks[S.sel];
+      detail = '<div class="sp-detail"><div class="sp-dh"><b>' + esc(tok.d) + '</b><span class="sp-ipa">' + ipaHtml(tok, w) + "</span>"
+        + (tok.say ? '<span class="sp-say">' + T("đọc là", "say") + " " + esc(tok.say) + "</span>" : "") + "</div>"
+        + (w.err ? '<ul class="sp-errs">' + errLines(w, tok) + "</ul>" : '<p class="sp-fine">' + T("Từ này bạn đọc tốt.", "You said this one well.") + "</p>") + "</div>";
+    }
+    var nErr = res.words.filter(function (w, i) { return w.err && !toks[i].f; }).length;
+    var sum = nErr ? T(nErr + " từ cần sửa · bấm từ màu cam/đỏ để xem lỗi", nErr + " word(s) to fix · tap an orange/red word") : T("Không thấy lỗi rõ ràng nào", "No clear mistakes found");
+    return '<div class="sp-result"><div class="sp-sum"><div class="sp-score ' + b[0] + '"><b>' + res.score + "</b><span>/100</span></div>"
+      + '<div class="sp-sumt"><b>' + b[1] + "</b><span>" + sum + "</span></div>"
+      + '<div class="sp-cmp"><button class="sp-btn" data-act="mine">' + IC.me + T("Giọng bạn", "Your voice") + '</button><button class="sp-btn" data-act="play">' + IC.play + T("Giọng mẫu", "Model voice") + "</button></div></div>"
+      + '<div class="sp-words">' + chips + "</div>" + detail
+      + '<p class="sp-foot">' + T("Điểm do máy chấm, mang tính tương đối. Chưa chấm được trọng âm và ngữ điệu.", "Machine score, approximate. Stress and intonation are not scored yet.") + "</p></div>";
+  }
+
+  function histBox() {
+    var h = readHist();
+    if (!h.length) return "";
+    var last = h.slice(-10), avg = Math.round(last.reduce(function (a, x) { return a + x.s; }, 0) / last.length);
+    var top = topErrs(h), weak = PronUI.weakCount();
+    var chev = '<svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg>';
+    var bar = '<div class="sp-histbar"><button class="sp-histbtn" data-act="hist" aria-expanded="' + histOpen + '">' + chev + T("Lịch sử luyện nói", "Speaking history") + "</button>"
+      + '<span class="sp-hsum"><b>' + h.length + "</b> " + T("lần", "tries") + " · " + T("TB 10 lần gần nhất", "last-10 avg") + " <b>" + avg + "</b></span>"
+      + (top.length ? '<span class="sp-top5" aria-label="' + T("Âm hay sai", "Common mistakes") + '">' + top.map(function (x) { return "<span>/" + esc(x[0]) + "/</span>"; }).join("") + "</span>" : "") + "</div>";
+    if (!histOpen) return bar;
+    var list = top.length ? '<p class="sp-hh">' + T(top.length + " âm bạn hay sai nhất", "Your " + top.length + " most-missed sounds") + '</p><ul class="sp-hl">'
+      + top.map(function (x) {
+        var t = TIP[x[0]];
+        return '<li><span class="ph">/' + esc(x[0]) + '/</span><span class="what">' + (t ? T("như trong ", "as in ") + "<i>" + t[0] + "</i> · " : "")
+          + "<em>" + T("sai ở " + x[1] + " lần đọc", "missed in " + x[1] + " tries") + "</em></span>"
+          + (t ? '<p class="sp-how">' + esc(en ? t[2] : t[1]) + "</p>" : "") + "</li>";
+      }).join("") + "</ul>"
+      : '<p class="sp-hnext">' + T("Chưa có âm nào sai lặp lại từ 2 lần trở lên.", "No sound has been missed twice yet.") + "</p>";
+    var next = weak ? '<p class="sp-hnext">' + T("Có <b>" + weak + "</b> thẻ lần gần nhất dưới " + WEAK_BELOW + " điểm. Bấm nút <b>Cần luyện nói lại</b> phía trên để ôn riêng các thẻ này.",
+      "<b>" + weak + "</b> card(s) scored under " + WEAK_BELOW + " last time. Use <b>Retry speaking</b> above to practise just those.") + "</p>" : "";
+    return bar + '<div class="sp-hist">' + list + next + "</div>";
+  }
+
+  function paint() {
+    var box = document.getElementById("speak");
+    if (!box || !cur) return;
+    if (!P) { box.innerHTML = '<div class="sp-pron"><span class="sp-note">' + T("Đang nạp phần phát âm…", "Loading pronunciation…") + "</span></div>"; return; }
+    var rec = recOf(cur), sent = modeOf(cur) === "s";
+    box.innerHTML = '<div class="sp-top"><span class="sp-lab">' + T("Luyện nói", "Speaking") + "</span>"
+      + '<div class="sp-listen"><button class="sp-btn" data-act="play">' + IC.play + (sent ? T("Nghe câu", "Play sentence") : T("Nghe", "Play")) + "</button>"
+      + '<button class="sp-btn" data-act="slow">' + IC.slow + T("Chậm", "Slow") + "</button></div></div>"
+      + pronLine(cur, rec)
+      + (S.state === "setup" ? setupBox() : recRow(cur, rec))
+      + (S.state === "done" || (S.res && S.state === "idle") ? resultBox(cur, rec) : "")
+      + (rec ? histBox() : "");
+  }
+  function paintLevel(v) { var el = document.getElementById("sp-lv"); if (el) el.style.width = Math.round(v * 100) + "%"; }
+  function paintProgress() {
+    var el = document.getElementById("sp-pg"), t = document.getElementById("sp-pgt");
+    if (el) el.style.width = Math.round(M.prog * 100) + "%";
+    if (t) t.textContent = progText();
+  }
+
+  function begin() {
+    S.msg = ""; stopAudio();
+    var go = function () {
+      return startRec().then(function () { S.state = "rec"; paint(); })
+        .catch(function (e) {
+          S.state = "idle";
+          S.msg = e && e.message === "nomic" ? T("Trình duyệt này không cho ghi âm. Hãy mở trang bằng Chrome trên máy tính.", "This browser can't record. Open the page in Chrome on a computer.")
+            : T("Trình duyệt chưa cho dùng micro. Bấm biểu tượng bên trái thanh địa chỉ → cho phép Micro, rồi bấm lại.", "Microphone blocked. Click the icon left of the address bar, allow the microphone, then try again.");
+          paint();
+        });
+    };
+    if (M.sess) return go();
+    // mô hình chưa nạp: đã có trong máy thì nạp ngầm song song với ghi âm; chưa có thì hỏi trước khi tải 242 MB
+    checkCached().then(function (c) {
+      if (c) { ensureModel().catch(function () {}); go(); }
+      else { S.state = "setup"; paint(); }
+    });
+  }
+  function download() {
+    S.state = "dl"; paint();
+    ensureModel().then(function () { S.state = "idle"; S.msg = T("Bộ chấm đã sẵn sàng. Bấm \"Đọc to để chấm\".", "The scorer is ready. Press \"Read aloud to score\"."); paint(); })
+      .catch(function () { S.state = "idle"; S.msg = T("Tải bộ chấm chưa xong (mạng chập chờn?). Bấm để thử lại.", "Download failed (network?). Press to try again."); paint(); });
+  }
+
+  function onClick(e) {
+    var b = e.target.closest("[data-act],[data-w]");
+    if (!b) return;
+    e.stopPropagation();
+    if (b.hasAttribute("data-w")) { S.sel = +b.getAttribute("data-w"); paint(); return; }
+    var a = b.getAttribute("data-act");
+    if (a === "play") playSample(cur, false);
+    else if (a === "slow") playSample(cur, true);
+    else if (a === "rec") begin();
+    else if (a === "stop") stopRec();
+    else if (a === "dl") download();
+    else if (a === "later") { S.state = "idle"; paint(); }
+    else if (a === "mine") playMine();
+    else if (a === "hist") { histOpen = !histOpen; paint(); }
+  }
+
+  window.PronUI = {
+    // khung trống: wire() vẽ nội dung
+    panel: function () { return '<section class="speak" id="speak" aria-label="Luyện nói"></section>'; },
+    wire: function (it, isEn) {
+      en = !!isEn;
+      if (R) stopRec();
+      if (!P) loadPron().then(function () { paint(); if (PronUI.onReady) PronUI.onReady(); });
+      if (!it) { cur = null; return; }
+      if (!cur || S.key !== it.key) { S = { key: it.key, state: "idle" }; stopAudio(); }
+      cur = it;
+      var box = document.getElementById("speak");
+      if (box) box.onclick = onClick;
+      // nút nghe từng cụm ở mặt sau thẻ câu
+      Array.prototype.forEach.call(document.querySelectorAll("[data-cplay]"), function (el) {
+        el.onclick = function (e) { e.stopPropagation(); playSample(cur, false, +el.getAttribute("data-cplay")); };
+      });
+      paint();
+    },
+    has: function (lk) { return !!(P && P.c && P.c[lk]); },
+    count: function () { return P && P.c ? Object.keys(P.c).length : 0; },
+    isWeak: function (lk) { var s = lastScores()[lk]; return s != null && s < WEAK_BELOW; },
+    weakCount: function () { var m = lastScores(), n = 0; for (var k in m) if (m[k] < WEAK_BELOW) n++; return n; },
+    onReady: null,
+    // tự kiểm (dev): chấm 1 file PCM 16 kHz thay cho micro
+    _test: function (url) { return fetch(url).then(function (r) { return r.arrayBuffer(); }).then(function (b) { var x = new Float32Array(b); S.audio = x; S.state = "busy"; paint(); return analyze(x); }); },
+    stop: function () { if (R) stopRec(); stopAudio(); }
+  };
+})();
+</script>
 <script>
 (function(){
   "use strict";
@@ -1203,7 +1974,7 @@ window.REVIEW_MAP = {
   var s0=load();
   // slugs: bài cuối đã mở của TỪNG đề (đổi đề rồi quay lại vẫn đúng bài); lần đầu vào thì mở trang tổng quan
   var state={ cert:s0.cert||"ccdv", slugs:s0.slugs||{}, lang:s0.lang||"en", theme:s0.theme||null,
-    view:s0.view||(s0.cert?"labs":"home"), cardMode:s0.cardMode||"word" };
+    view:s0.view||(s0.cert?"labs":"home"), cardMode:s0.cardMode||"word", fcSpeak:!!s0.fcSpeak };
   if(s0.slug && !state.slugs[state.cert]) state.slugs[state.cert]=s0.slug;
 
   // câu đã trả lời (lần chọn ĐẦU TIÊN — dùng để tính điểm, không đổi khi làm lại): {id:{p, ok}} — lưu riêng để quay lại vẫn còn
@@ -1858,7 +2629,13 @@ window.REVIEW_MAP = {
   // "Theo từ": từ ↔ nghĩa. "Theo câu": câu ví dụ chứa đúng từ đó (D.fcs, build ghép từ data/fc-sentences.json) ↔ đọc theo cụm.
   // Hai chế độ dùng chung khoá từ (lk), nên đổi chế độ vẫn giữ được từ đang học.
   function termKey(s){ return String(s).toLowerCase().replace(/\s+/g," ").trim(); }
+  // lọc "Cần luyện nói lại": gom thẻ (cả 4 đề) mà lần chấm gần nhất dưới 75 điểm
+  function speakOnly(){ return state.fcSpeak && window.PronUI && PronUI.weakCount()>0; }
   function deckItems(scope){
+    if(speakOnly()) return deckItemsRaw("all").filter(function(it){ return PronUI.isWeak(it.lk); });
+    return deckItemsRaw(scope);
+  }
+  function deckItemsRaw(scope){
     var qs=D.questions.filter(function(q){ return scope==="all"||q.cert===scope; });
     var out=[], seen={}, sent=cardMode()==="sentence", FC=D.fcs||{};
     qs.forEach(function(q){
@@ -1890,7 +2667,8 @@ window.REVIEW_MAP = {
     var split='<p class="csplit">'+fc.c.map(function(c,i){ return '<span class="cseg"><sup>'+(i+1)+'</sup>'+hlTerm(c[0],it.term)+'</span>'; }).join('<span class="cbar" aria-hidden="true">/</span>')+'</p>';
     var rows=fc.c.map(function(c,i){
       return '<li class="crow"><span class="cn">'+(i+1)+'</span><div class="cbody"><div class="cen">'+hlTerm(c[0],it.term)+'</div>'
-        +'<div class="cvi">'+esc(en?c[2]:c[1])+'</div></div><span class="crole">'+esc(roleLabel(c[3]))+'</span></li>';
+        +'<div class="cvi">'+esc(en?c[2]:c[1])+'</div></div><span class="crole">'+esc(roleLabel(c[3]))+'</span>'
+        +'<button class="cplay" data-cplay="'+i+'" aria-label="'+(en?"Play phrase ":"Nghe cụm ")+(i+1)+'"><svg viewBox="0 0 24 24" width="14" height="14" aria-hidden="true"><path d="M8 5.5v13l10.5-6.5z" fill="currentColor"/></svg></button></li>';
     }).join("");
     return split+'<ol class="chunks">'+rows+'</ol>'
       +(en?'':'<div class="cfull"><span>Dịch trọn</span>'+esc(fc.vi)+'</div>')
@@ -1910,7 +2688,7 @@ window.REVIEW_MAP = {
     var en=state.lang==="en";
     var scope=state.cert;   // mỗi đề một bộ thẻ riêng (UAT 26/09); tiến độ lưu theo từ nên từ chung 2 đề thuộc ở đâu cũng tính
     var items=deckItems(scope);
-    var sig=cardMode()+"|"+scope+"|"+state.lang;
+    var sig=cardMode()+"|"+scope+"|"+state.lang+(speakOnly()?"|sp":"");
     if(deck.sig!==sig){
       deck.sig=sig; deck.flip=false; deck.history=[]; deck.queue=shuffle(dueDeck(items));
       // vừa đổi Theo từ ↔ Theo câu: đưa đúng từ đang học lên đầu (kể cả khi thẻ đó chưa tới hạn ôn)
@@ -1928,7 +2706,11 @@ window.REVIEW_MAP = {
     var modeSeg='<div class="seg" id="fc-mode">'
       +'<button data-m="word" class="'+(cardMode()==="word"?"on":"")+'">'+(en?"Terms":"Theo từ")+'</button>'
       +'<button data-m="sentence" class="'+(cardMode()==="sentence"?"on":"")+'">'+(en?"Sentences":"Theo câu")+'</button></div>';
-    var tools='<div class="fc-tools">'+modeSeg
+    var pc=window.PronUI?PronUI.weakCount():0;
+    var spk=pc?'<button class="fc-spk'+(speakOnly()?" on":"")+'" id="fc-spk" aria-pressed="'+(speakOnly()?"true":"false")+'">'
+      +'<svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5.5 11a6.5 6.5 0 0 0 13 0M12 17.5V21"/></svg>'
+      +(en?"Retry speaking":"Cần luyện nói lại")+' <b>'+pc+'</b></button>':'';
+    var tools='<div class="fc-tools">'+modeSeg+spk
       +'<div class="fc-count"><button class="fc-reset" id="fc-reset">'+(en?"Reset":"Làm lại")+'</button></div></div>';
 
     // vertical progress bar (đã thuộc = xanh lá dưới cùng, đang học = xanh dương phía trên) + số liệu
@@ -1977,7 +2759,7 @@ window.REVIEW_MAP = {
         +'<button class="prev" id="fc-prev"'+(deck.history.length?"":" disabled")+'>'+(en?"← Back":"← Trước")+'</button>'
         +'<button class="again" id="fc-again">'+(en?"Review again":"Ôn lại")+'</button>'
         +'<button class="known" id="fc-known">'+(en?"I know this":"Đã thuộc")+'</button></div>';
-      mainHtml=card+acts;
+      mainHtml=card+(window.PronUI?PronUI.panel():"")+acts;   // luyện nói: nghe mẫu, ghi âm, chấm phát âm (pron.js)
     }
     return tools+'<div class="fc-body">'+statsHtml+'<div class="flash-col">'+mainHtml+'</div></div>';
   }
@@ -2016,9 +2798,12 @@ window.REVIEW_MAP = {
     var again=document.getElementById("fc-again"); if(again) again.onclick=function(){ grade(false); };
     var kn=document.getElementById("fc-known"); if(kn) kn.onclick=function(){ grade(true); };
     var rs=document.getElementById("fc-reset"); if(rs) rs.onclick=resetKnown;
+    var sp=document.getElementById("fc-spk"); if(sp) sp.onclick=function(){ state.fcSpeak=!speakOnly(); deck.sig=null; save(); render(); };
     var rst=document.getElementById("fc-restart"); if(rst) rst.onclick=resetKnown;
+    if(window.PronUI) PronUI.wire(document.getElementById("speak")?deck.queue[0]:null, isEN());
   }
   function cardMode(){ return state.cardMode==="sentence" ? "sentence" : "word"; }
+  if(window.PronUI) PronUI.onReady=function(){ if(state.view==="cards"){ deck.sig=null; render(); } };
 
   // ── Luyện đề: bộ máy luyện đề cũ (PRACTICE.tpl) chạy trong iframe srcdoc, dùng đúng key lưu cũ <đề>-console-v2 ──
   function effTheme(){ return state.theme || (matchMedia("(prefers-color-scheme:dark)").matches?"dark":"light"); }
