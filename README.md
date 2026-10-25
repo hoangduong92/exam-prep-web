@@ -20,7 +20,6 @@
 - **CCDV-F** — Claude Certified Developer (Foundations) · 150 câu — học + luyện đề trong Labs
 - **CCAR-F** — Claude Certified Architect (Foundations) · 72 câu — học + luyện đề trong Labs
 - **CCAR-P** — Claude Certified Architect (Professional) · 150 câu — học + luyện đề trong Labs
-- **ANS-C01** — AWS Advanced Networking (Specialty) · 326 câu
 - **AWS** — AWS 5 chứng chỉ (SAP · SCS · DOP · ANS · AIP · có mật khẩu) · 1345 câu
 - **PMP** — PMP Exam Lab 2026 (ECO 2026 · Labs · Flashcards) · 500 câu
 
