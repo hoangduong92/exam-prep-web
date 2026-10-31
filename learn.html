@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Claude Cert Labs</title>
+<title>Học theo bài</title>
 
 <meta name="theme-color" content="#F8F6F3" media="(prefers-color-scheme: light)">
 <meta name="theme-color" content="#151211" media="(prefers-color-scheme: dark)">
@@ -100,12 +100,14 @@ button{font-family:inherit;cursor:pointer;color:inherit}
 /* ── thanh trên ── */
 .top{position:sticky;top:0;z-index:40;background:var(--ground);border-bottom:1px solid var(--line);transition:transform var(--dur) var(--ease)}
 .top-in{max-width:1220px;margin:0 auto;padding:0 24px;height:58px;display:flex;align-items:center;gap:12px}
-/* đường dẫn (UAT 26/09): màn danh sách đề = "Claude Cert Labs"; trong 1 đề = "Claude Cert Labs › CCDV-F", bấm phần đầu để về danh sách */
+/* đường dẫn: màn danh sách = tên nhóm ("Chứng chỉ Claude"); trong 1 chứng chỉ = "Chứng chỉ Claude › CCDV-F", bấm phần đầu để về danh sách */
 .crumb{display:flex;align-items:center;gap:8px;flex:none;min-width:0;padding-right:8px}
 .brand{display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--ink);flex:none;border-radius:var(--r-md)}
 .site-home{color:var(--ink-2);font-size:13px;text-decoration:underline;text-underline-offset:3px;white-space:nowrap}
 .site-home:hover{color:var(--ink)}
 .sep-home{color:var(--ink-3)}
+/* tên nhóm khá dài: khi hẹp, trong một chứng chỉ chỉ giữ nhóm, bấm nhóm để lên danh sách có link về trang chủ */
+@media (max-width:1100px){body:not(.at-list) .site-home,body:not(.at-list) .sep-home{display:none}}
 @media (max-width:720px){body:not(.at-list) .site-home,.sep-home,body.at-list .site-home~.brand{display:none}.site-home{display:inline-flex;align-items:center;min-height:40px}body:not(.at-list) .site-home{display:none}}
 .crumb.in .brand{color:var(--ink-2)}
 .crumb.in .brand small{display:none}
@@ -550,6 +552,8 @@ mark.tw{background:var(--acc-soft);color:var(--acc-text);font-weight:600;border-
 }
 @media (min-width:761px) and (max-width:860px){
   .tabs button{padding:0 4px}
+  .crumb.in .brand .mark{display:none}
+  .crumb.in .brand b,.crumb .here{font-size:16px}
 }
 /* ── điện thoại: đầu trang một dòng, ẩn khi cuộn xuống; tab chuyển trang xuống đáy ── */
 @media (max-width:760px){
@@ -615,7 +619,7 @@ html{scroll-behavior:smooth}
   <div class="top-in">
     <nav class="crumb" id="crumb" aria-label="Breadcrumb">
       <a class="site-home" id="site-home" href="index.html">Tất cả chứng chỉ</a><span class="sep-home" aria-hidden="true">›</span>
-      <a class="brand" href="#" id="brand"><span class="bk" aria-hidden="true">‹</span><span class="mark"></span><span><b>Claude Cert Labs</b><small id="brand-sub"></small></span></a>
+      <a class="brand" href="#" id="brand"><span class="bk" aria-hidden="true">‹</span><span class="mark"></span><span><b id="brand-name"></b><small id="brand-sub"></small></span></a>
       <span class="sep" aria-hidden="true">›</span><span class="here" id="crumb-here" aria-current="page"></span>
     </nav>
     <nav class="tabs" id="tabs">
@@ -2264,6 +2268,12 @@ window.REVIEW_MAP = {
   var D = window.LEARN || {certs:{},questions:[],labs:[]};
   var QIDX = {}; D.questions.forEach(function(q){ QIDX[q.id]=q; });
   var CERT_ORDER = ["ccdv","ccao","ccarp","ccarf","tfa"];
+  // nhóm theo hãng: màn danh sách chỉ hiện một nhóm, đường dẫn là Tất cả chứng chỉ › nhóm › mã chứng chỉ
+  var CERT_GROUPS = [
+    {certs:["ccdv","ccao","ccarp","ccarf"], en:"Claude certificates", vi:"Chứng chỉ Claude", topic:"Claude"},
+    {certs:["tfa"], en:"HashiCorp certificates", vi:"Chứng chỉ HashiCorp", topic:"Terraform"}
+  ];
+  function groupOf(c){ return CERT_GROUPS.filter(function(g){ return g.certs.indexOf(c)>=0; })[0]||CERT_GROUPS[0]; }
   var CERT_SHORT = {ccdv:"CCDV",ccao:"CCAO",ccarp:"CCAR-P",ccarf:"CCAR-F",tfa:"TFA"};
   var EXAM_COLOR = {ccdv:"#c98a2f",ccao:"#cc6b49",ccarp:"#8a5cc4",ccarf:"#974324",tfa:"#2f7f86"};
 
@@ -2329,7 +2339,7 @@ window.REVIEW_MAP = {
   document.getElementById("brand").onclick=function(e){ e.preventDefault(); go("home"); };
   function go(view){ if(state.view===view){ window.scrollTo(0,0); return; } state.view=view; save(); render(); window.scrollTo(0,0); }
 
-  // chữ trên thanh trên theo ngôn ngữ đang chọn + đường dẫn "Claude Cert Labs › <đề>"
+  // chữ trên thanh trên theo ngôn ngữ đang chọn + đường dẫn "<nhóm> › <mã chứng chỉ>"
   // view "home" = màn danh sách đề (không có tab); 4 view còn lại đều thuộc đề đang chọn (state.cert)
   function applyChrome(){
     document.documentElement.lang=state.lang;
@@ -2347,9 +2357,12 @@ window.REVIEW_MAP = {
     var siteHome=document.getElementById("site-home");
     if(siteHome) siteHome.textContent=L("All certificates","Tất cả chứng chỉ");
     var brand=document.getElementById("brand");
-    brand.title=atList?"":L("All exams","Danh sách đề");
-    brand.setAttribute("aria-label", atList?"Claude Cert Labs":L("Back to all exams","Về danh sách đề"));
-    document.getElementById("tab-labs").textContent=L("Labs","Bài học");
+    var group=groupOf(state.cert), groupName=T(group);
+    document.getElementById("brand-name").textContent=groupName;
+    document.title=(!atList&&c)?c.code+" · "+groupName:groupName;
+    brand.title=atList?"":groupName;
+    brand.setAttribute("aria-label", atList?groupName:L("Back to ","Về nhóm ")+groupName);
+    document.getElementById("tab-labs").textContent=L("Lessons","Bài học");
     document.getElementById("tab-practice").textContent=L("Practice","Luyện đề");
     document.getElementById("tab-cards").textContent=L("Flashcards","Thẻ từ");
     document.getElementById("tab-review").textContent=L("Weak spots","Điểm yếu");
@@ -2442,8 +2455,8 @@ window.REVIEW_MAP = {
 
   // ── trang tổng quan ──
   function renderHome(){
-    var ready=D.labs.filter(isReady), nq=0; ready.forEach(function(l){ nq+=labIds(l).length; });
-    var certs=CERT_ORDER.filter(function(c){ return D.certs[c]; });
+    var group=groupOf(state.cert), certs=group.certs.filter(function(c){ return D.certs[c]; });
+    var ready=D.labs.filter(function(l){ return isReady(l)&&certs.indexOf(l.cert)>=0; }), nq=0; ready.forEach(function(l){ nq+=labIds(l).length; });
     var cur=state.slugs[state.cert] ? currentLab() : null, resume="";
     if(cur){
       var p=labPos(cur), s=labStat(cur);
@@ -2451,12 +2464,12 @@ window.REVIEW_MAP = {
              : s.a ? L(s.a+"/"+s.n+" questions answered","đã làm "+s.a+"/"+s.n+" câu") : L("not started yet","chưa làm câu nào");
       resume='<section class="resume"><div class="rs-txt"><span class="rs-k">'+L("Pick up where you left off","Học tiếp chỗ đang dở")+'</span>'
         +'<h2>'+esc(T(cur.title))+'</h2>'
-        +'<span class="rs-m"><span class="dot" style="--c:'+EXAM_COLOR[cur.cert]+'"></span>'+esc(D.certs[cur.cert].code)+' · '+L("Lab","Bài")+' '+(p.i+1)+'/'+p.n+' · '+st+'</span></div>'
+        +'<span class="rs-m"><span class="dot" style="--c:'+EXAM_COLOR[cur.cert]+'"></span>'+esc(D.certs[cur.cert].code)+' · '+L("Lesson","Bài")+' '+(p.i+1)+'/'+p.n+' · '+st+'</span></div>'
         +'<button class="btn primary" data-open="'+cur.cert+'|'+cur.slug+'">'+L("Continue","Học tiếp")+' →</button></section>';
     } else {
-      var first=nextLab("ccdv")||ready[0];
+      var first=nextLab(certs[0])||ready[0];
       if(first) resume='<section class="resume"><div class="rs-txt"><span class="rs-k">'+L("New here?","Mới bắt đầu?")+'</span>'
-        +'<h2>'+L("Start with lab 1 of "+D.certs[first.cert].code,"Bắt đầu với bài 1 của "+D.certs[first.cert].code)+'</h2>'
+        +'<h2>'+L("Start with lesson 1 of "+D.certs[first.cert].code,"Bắt đầu với bài 1 của "+D.certs[first.cert].code)+'</h2>'
         +'<span class="rs-m">'+esc(T(first.title))+' · '+L("about 10 minutes","khoảng 10 phút")+'</span></div>'
         +'<button class="btn primary" data-open="'+first.cert+'|'+first.slug+'">'+L("Start","Bắt đầu")+' →</button></section>';
     }
@@ -2464,26 +2477,28 @@ window.REVIEW_MAP = {
       var cs=certStat(c), nx=nextLab(c), started=!!state.slugs[c]||cs.a>0;
       var pct=cs.labs?Math.round(cs.done/cs.labs*100):0;
       return '<div class="exam-row" style="--c:'+EXAM_COLOR[c]+'">'
-        +'<div class="ex-name"><div class="ex-code"><span class="dot"></span>'+esc(D.certs[c].code)+' <span>· '+cs.labs+' '+L("labs","bài")+' · '+cs.n+' '+L("questions","câu")+'</span></div>'
+        +'<div class="ex-name"><div class="ex-code"><span class="dot"></span>'+esc(D.certs[c].code)+' <span>· '+cs.labs+' '+L("lessons","bài")+' · '+cs.n+' '+L("questions","câu")+'</span></div>'
         +'<h3>'+esc(D.certs[c].name)+'</h3>'
         +(nx?'<span class="ex-next">'+(started?L("Next: ","Tiếp theo: "):L("Starts with: ","Bắt đầu từ: "))+esc(T(nx.title))+'</span>':'')+'</div>'
         +'<div class="prog"><span class="bar"><i style="width:'+pct+'%"></i></span>'
-        +'<span>'+L("Done ","Đã học ")+'<b>'+cs.done+'/'+cs.labs+'</b> '+L("labs","bài")+'</span>'
+        +'<span>'+L("Done ","Đã học ")+'<b>'+cs.done+'/'+cs.labs+'</b> '+L("lessons","bài")+'</span>'
         +'<small>'+(cs.a?L(cs.c+"/"+cs.a+" answers correct","đúng "+cs.c+"/"+cs.a+" câu đã làm"):L("No answers yet","Chưa làm câu nào"))+'</small>'
         +practiceLine(c)+weakLine(c)+'</div>'
-        +'<div class="ex-acts">'+(nx?'<button class="btn" data-open="'+c+'|'+nx.slug+'">'+(started?L("Continue lab","Học tiếp"):L("Start lab","Học bài"))+' →</button>':'')
+        +'<div class="ex-acts">'+(nx?'<button class="btn" data-open="'+c+'|'+nx.slug+'">'+(started?L("Continue","Học tiếp"):L("Start","Học bài"))+' →</button>':'')
         +'<button class="btn'+((practiceStat(c)||{}).live?' primary':'')+'" data-practice="'+c+'">'+((practiceStat(c)||{}).live?L("Resume practice","Làm tiếp đề"):L("Practice exam","Luyện đề"))+' →</button></div>'
         +'</div>';
     }).join("");
-    // bản web (trang có manifest PWA, nằm cạnh index.html) có thêm đề ngoài Claude (ANS-C01…) ở trang chủ chung
-    var more=document.querySelector('link[rel="manifest"]') ? '<a class="more-exams" href="index.html">'+L("Other exams →","Đề khác →")+'</a>' : '';
+    // bản web có trang chủ chung (trang có manifest PWA, nằm cạnh index.html); bản chạy trên máy thì chuyển thẳng sang nhóm còn lại
+    var other=CERT_GROUPS[CERT_GROUPS.indexOf(group)===0?1:0];
+    var more=document.querySelector('link[rel="manifest"]') ? '<a class="more-exams" href="index.html">'+L("All certificates →","Tất cả chứng chỉ →")+'</a>'
+      : '<a class="more-exams" href="#" data-group="'+other.certs[0]+'">'+esc(T(other))+' →</a>';
     return '<div class="home">'+runningBanner()
-      +'<section class="hero"><h1>'+L("Learn how Claude works, then meet the exam","Hiểu Claude chạy thế nào, rồi gặp đề thi")+'</h1>'
-      +'<p>'+L(ready.length+" labs mapped to the "+certs.length+" exam guides, with "+nq+" real practice questions. Each lab takes about 10 minutes.",
-              ready.length+" bài học bám theo exam guide của "+certs.length+" đề, kèm "+nq+" câu hỏi thật trong ngân hàng luyện đề. Mỗi bài khoảng 10 phút.")+'</p>'
+      +'<section class="hero"><h1>'+L("Learn how "+group.topic+" works, then meet the exam","Hiểu "+group.topic+" chạy thế nào, rồi gặp đề thi")+'</h1>'
+      +'<p>'+L(ready.length+" lessons mapped to the exam guide"+(certs.length>1?"s of "+certs.length+" certificates":"")+", with "+nq+" real practice questions. Each lesson takes about 10 minutes.",
+              ready.length+" bài học bám theo exam guide"+(certs.length>1?" của "+certs.length+" chứng chỉ":"")+", kèm "+nq+" câu hỏi thật trong ngân hàng luyện đề. Mỗi bài khoảng 10 phút.")+'</p>'
       +'<ol class="how"><li><span class="n">1</span>'+L("Read the mechanism","Đọc cơ chế")+'</li><li><span class="n">2</span>'+L("Watch the diagram run","Xem sơ đồ chạy")+'</li><li><span class="n">3</span>'+L("Answer real exam items","Làm câu hỏi thật")+'</li></ol></section>'
       +resume
-      +'<section><div class="list-h"><h2>'+L("Your exams","Các đề của bạn")+'</h2><span>'+L("Progress is saved on this device","Tiến độ lưu trên máy này")+'</span></div>'
+      +'<section><div class="list-h"><h2>'+esc(T(group))+'</h2><span>'+L("Progress is saved on this device","Tiến độ lưu trên máy này")+'</span></div>'
       +'<div class="panel">'+rows+'</div></section>'
       +more
       +'</div>';
@@ -2493,12 +2508,12 @@ window.REVIEW_MAP = {
   function renderRail(lab){
     var ls=labsFor(state.cert), cs=certStat(state.cert), pct=cs.labs?Math.round(cs.done/cs.labs*100):0;
     var info='<div class="rcert" style="--c:'+EXAM_COLOR[state.cert]+'"><div class="rname">'+esc(D.certs[state.cert].name)+'</div>'
-      +'<div class="rprog"><span class="bar"><i style="width:'+pct+'%"></i></span><span>'+L("Done ","Đã học ")+cs.done+'/'+cs.labs+' '+L("labs","bài")+'</span></div></div>';
+      +'<div class="rprog"><span class="bar"><i style="width:'+pct+'%"></i></span><span>'+L("Done ","Đã học ")+cs.done+'/'+cs.labs+' '+L("lessons","bài")+'</span></div></div>';
     var toggle="";
     if(lab){
       var p=labPos(lab);
-      toggle='<button class="rail-toggle" data-railtoggle aria-expanded="'+(railListOpen?"true":"false")+'"><span class="rt-k">'+L("Lab","Bài")+' '+(p.i+1)+'/'+p.n+' · Domain '+lab.domain+'</span>'
-        +'<span class="rt-t">'+esc(T(lab.title))+'</span><span class="chev">'+(railListOpen?L("Close ▴","Đóng ▴"):L("All labs ▾","Danh sách ▾"))+'</span></button>';
+      toggle='<button class="rail-toggle" data-railtoggle aria-expanded="'+(railListOpen?"true":"false")+'"><span class="rt-k">'+L("Lesson","Bài")+' '+(p.i+1)+'/'+p.n+' · Domain '+lab.domain+'</span>'
+        +'<span class="rt-t">'+esc(T(lab.title))+'</span><span class="chev">'+(railListOpen?L("Close ▴","Đóng ▴"):L("All lessons ▾","Danh sách ▾"))+'</span></button>';
     }
     var byDom={}; ls.forEach(function(l){ (byDom[l.domain]=byDom[l.domain]||[]).push(l); });
     var cur=lab?String(lab.domain):null, list="", doms=D.certs[state.cert].domains||{};
@@ -2521,7 +2536,7 @@ window.REVIEW_MAP = {
       });
       list+='</div>';
     });
-    var sec=lab?('<div class="secnav"><div class="h">'+L("In this lab","Trong bài này")+'</div>'
+    var sec=lab?('<div class="secnav"><div class="h">'+L("In this lesson","Trong bài này")+'</div>'
       +snl("g-guide",1,L("Mechanism","Cơ chế"))+snl("g-demo",2,L("Diagram","Minh hoạ"))+(hasHands(lab)?snl("g-hands",3,L("Hands-on","Thực chiến")):'')+qNavHtml(lab)+'</div>'):'';
     return '<aside class="rail'+(railListOpen?" open":"")+'" id="rail">'+info+toggle+'<div class="rail-list">'+list+'</div>'+sec+'</aside>';
   }
@@ -2534,7 +2549,7 @@ window.REVIEW_MAP = {
   }
   // thanh nhảy nhanh (màn hẹp): 2 mục đầu cuộn tới đoạn, mục "Câu hỏi" xổ ra ô nhảy số ngay tại chỗ
   function jumpNavHtml(lab){
-    return '<div id="qjumpwrap"><nav class="jump" aria-label="'+L("In this lab","Trong bài này")+'"><a href="#g-guide" data-sec="g-guide">1 · '+L("Mechanism","Cơ chế")+'</a><a href="#g-demo" data-sec="g-demo">2 · '+L("Diagram","Minh hoạ")+'</a>'+(hasHands(lab)?'<a href="#g-hands" data-sec="g-hands">3 · '+L("Hands-on","Thực chiến")+'</a>':'')+'<button type="button" class="jq'+(qJumpOpen?" on":"")+'" data-qtoggle="1">'+(hasHands(lab)?4:3)+' · '+L("Questions","Câu hỏi")+' '+(qJumpOpen?"▾":"▸")+'</button></nav>'
+    return '<div id="qjumpwrap"><nav class="jump" aria-label="'+L("In this lesson","Trong bài này")+'"><a href="#g-guide" data-sec="g-guide">1 · '+L("Mechanism","Cơ chế")+'</a><a href="#g-demo" data-sec="g-demo">2 · '+L("Diagram","Minh hoạ")+'</a>'+(hasHands(lab)?'<a href="#g-hands" data-sec="g-hands">3 · '+L("Hands-on","Thực chiến")+'</a>':'')+'<button type="button" class="jq'+(qJumpOpen?" on":"")+'" data-qtoggle="1">'+(hasHands(lab)?4:3)+' · '+L("Questions","Câu hỏi")+' '+(qJumpOpen?"▾":"▸")+'</button></nav>'
       +(qJumpOpen?('<div class="qjump-grid qjump-mob">'+qJumpDots(lab)+'</div>'):'')+'</div>';
   }
   function qJumpDots(lab){
@@ -2551,10 +2566,10 @@ window.REVIEW_MAP = {
     var prev=ls[i-1], next=ls[i+1];
     function b(l,dir){
       if(!l) return '<span></span>';
-      return '<button class="pgbtn '+dir+'" data-slug="'+l.slug+'"><span class="pgk">'+(dir==="prev"?L("← Previous lab","← Bài trước"):L("Next lab →","Bài tiếp →"))+'</span>'
+      return '<button class="pgbtn '+dir+'" data-slug="'+l.slug+'"><span class="pgk">'+(dir==="prev"?L("← Previous lesson","← Bài trước"):L("Next lesson →","Bài tiếp →"))+'</span>'
         +'<span class="pgt">'+esc(T(l.title))+'</span></button>';
     }
-    return '<nav class="pager" aria-label="'+L("Lab navigation","Chuyển bài")+'">'+b(prev,"prev")+'<span class="pgpos">'+(i+1)+' / '+ls.length+'</span>'+b(next,"next")+'</nav>';
+    return '<nav class="pager" aria-label="'+L("Lesson navigation","Chuyển bài")+'">'+b(prev,"prev")+'<span class="pgpos">'+(i+1)+' / '+ls.length+'</span>'+b(next,"next")+'</nav>';
   }
 
   // scrollspy: sáng mục đang xem (thanh trái trên máy tính, thanh nhảy nhanh trên điện thoại)
@@ -2913,11 +2928,11 @@ window.REVIEW_MAP = {
       var tip=L("Question","Câu")+" "+(i+1)+(r?(r.ok?L(" · correct"," · đúng"):L(" · wrong"," · sai")):L(" · not answered"," · chưa làm"));
       return '<button class="qdot'+cls+'" data-jump="'+id+'" title="'+tip+'" aria-label="'+tip+'">'+(i+1)+'</button>';
     }).join("");
-    var txt = s.done ? ('✓ '+L("Lab done · ","Xong bài · ")+L(s.c+"/"+s.n+" correct","đúng "+s.c+"/"+s.n))
+    var txt = s.done ? ('✓ '+L("Lesson done · ","Xong bài · ")+L(s.c+"/"+s.n+" correct","đúng "+s.c+"/"+s.n))
             : s.a ? (L("Answered ","Đã làm ")+'<b>'+s.a+'/'+s.n+'</b> · '+L("correct ","đúng ")+'<b>'+s.c+'</b>')
             : L("Not started · "+s.n+" questions","Chưa làm · "+s.n+" câu");
     var acts=(s.w?'<button class="btn sm" data-retry="wrong">↺ '+L("Redo wrong ("+s.w+")","Làm lại câu sai ("+s.w+")")+'</button>':'')
-      +(s.a?'<button class="btn link sm" data-retry="all">'+L("Reset lab","Làm lại cả bài")+'</button>':'');
+      +(s.a?'<button class="btn link sm" data-retry="all">'+L("Reset lesson","Làm lại cả bài")+'</button>':'');
     return '<div class="scorebar'+(s.done?" done":"")+'"><div class="sc">'+txt+'</div><div class="qdots">'+dots+'</div>'+(acts?'<div class="acts">'+acts+'</div>':'')+'</div>';
   }
   function renderQuestions(lab){
@@ -2974,9 +2989,9 @@ window.REVIEW_MAP = {
 
   function renderPending(){
     var rl=D.labs.filter(isReady)[0];
-    return '<section class="sec pending-panel"><h2>'+L("Labs in progress","Bài đang soạn")+'</h2>'
-      +'<p>'+L("This exam's labs are being written.","Các bài của đề này đang được soạn.")+'</p>'
-      +(rl?('<button class="btn primary" data-open="'+rl.cert+'|'+rl.slug+'">'+L("Open a finished lab →","Mở một bài đã xong →")+'</button>'):'')
+    return '<section class="sec pending-panel"><h2>'+L("Lessons in progress","Bài đang soạn")+'</h2>'
+      +'<p>'+L("Lessons for this certificate are being written.","Các bài của chứng chỉ này đang được soạn.")+'</p>'
+      +(rl?('<button class="btn primary" data-open="'+rl.cert+'|'+rl.slug+'">'+L("Open a finished lesson →","Mở một bài đã xong →")+'</button>'):'')
       +'</section>';
   }
 
@@ -3250,6 +3265,7 @@ window.REVIEW_MAP = {
     var el=t.closest("[data-open]");
     if(el){ var p=el.getAttribute("data-open").split("|"); openLab(p[0],p[1]); return; }
     el=t.closest("[data-go]"); if(el){ go(el.getAttribute("data-go")); return; }
+    el=t.closest("[data-group]"); if(el){ e.preventDefault(); state.cert=el.getAttribute("data-group"); save(); render(); window.scrollTo(0,0); return; }
     el=t.closest("[data-practice]"); if(el){ state.cert=el.getAttribute("data-practice"); go("practice"); return; }
     el=t.closest("[data-weak]"); if(el){ state.cert=el.getAttribute("data-weak"); go("review"); return; }
     el=t.closest(".opt");
