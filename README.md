@@ -15,13 +15,14 @@
 
 ## Có gì
 
-- **LABS** — Claude Cert Labs (Học theo exam guide · CCAO · CCDV · CCAR-F · CCAR-P) · 123 bài
+- **LABS** — Claude Cert Labs (Học theo exam guide · CCAO · CCDV · CCAR-F · CCAR-P · Terraform) · 160 bài
 - **CCAO-F** — Claude Certified Associate (Foundations) · 150 câu — học + luyện đề trong Labs
 - **CCDV-F** — Claude Certified Developer (Foundations) · 150 câu — học + luyện đề trong Labs
 - **CCAR-F** — Claude Certified Architect (Foundations) · 72 câu — học + luyện đề trong Labs
 - **CCAR-P** — Claude Certified Architect (Professional) · 150 câu — học + luyện đề trong Labs
 - **AWS** — AWS 5 chứng chỉ (SAP · SCS · DOP · ANS · AIP · có mật khẩu) · 1345 câu
 - **PMP** — PMP Exam Lab 2026 (ECO 2026 · Labs · Flashcards) · 500 câu
+- **TFA-004** — HashiCorp Terraform Associate (004) · 150 câu — học + luyện đề trong Labs
 
 Trang ôn thi cá nhân, không liên kết với Anthropic hay AWS. Câu luyện đề chứng chỉ Claude do AI soạn theo Exam Guide công khai, không phải đề thật; riêng 12 câu mẫu CCAR-F trích nguyên từ Exam Guide.
 
