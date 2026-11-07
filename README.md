@@ -20,8 +20,8 @@
 - **CCDV-F** — Claude Certified Developer (Foundations) · 150 câu — học + luyện đề trên trang học
 - **CCAR-F** — Claude Certified Architect (Foundations) · 72 câu — học + luyện đề trên trang học
 - **CCAR-P** — Claude Certified Architect (Professional) · 150 câu — học + luyện đề trên trang học
-- **AWS** — Chứng chỉ AWS (SAP · SCS · DOP · ANS · AIP · có mật khẩu) · 1345 câu
-- **PMP** — PMP Exam Lab 2026 (ECO 2026 · Labs · Flashcards) · 500 câu
+- **AWS** — Chứng chỉ AWS (SAP · SCS · DOP · ANS · AIP · có mật khẩu) · 1480 câu
+- **PMP** — PMP Exam Lab 2026 (ECO 2026 · 6 dạng câu mới · Flashcards) · 560 câu
 - **TFA-004** — HashiCorp Terraform Associate (004) · 150 câu — học + luyện đề trên trang học
 
 Trang ôn thi cá nhân, không liên kết với Anthropic hay AWS. Câu luyện đề chứng chỉ Claude do AI soạn theo Exam Guide công khai, không phải đề thật; riêng 12 câu mẫu CCAR-F trích nguyên từ Exam Guide.
