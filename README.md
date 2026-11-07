@@ -20,7 +20,7 @@
 - **CCDV-F** — Claude Certified Developer (Foundations) · 150 câu — học + luyện đề trên trang học
 - **CCAR-F** — Claude Certified Architect (Foundations) · 72 câu — học + luyện đề trên trang học
 - **CCAR-P** — Claude Certified Architect (Professional) · 150 câu — học + luyện đề trên trang học
-- **AWS** — Chứng chỉ Cloud và Data (AWS SAP · SCS · DOP · ANS · AIP · Databricks DEA · có mật khẩu) · 1480 câu
+- **AWS** — Chứng chỉ Cloud và Data (AWS SAP · SCS · DOP · ANS · AIP · Databricks DEA · có mật khẩu) · 1492 câu
 - **PMP** — PMP Exam Lab 2026 (ECO 2026 · 6 dạng câu mới · Flashcards) · 560 câu
 - **TFA-004** — HashiCorp Terraform Associate (004) · 150 câu — học + luyện đề trên trang học
 
